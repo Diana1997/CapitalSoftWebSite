@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter your name.
+        /// </summary>
+        public static string Please_enter_your_name {
+            get {
+                return ResourceManager.GetString("Please_enter_your_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Portfolio.
         /// </summary>
         public static string Portfolio {

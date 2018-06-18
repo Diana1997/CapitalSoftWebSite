@@ -25,17 +25,11 @@
                     <li>@Html.ActionLink(Resources.Resource.About, "", "")</li>
                     <li>@Html.ActionLink(Resources.Resource.Team, "", "")</li>
                     <li>@Html.ActionLink(Resources.Resource.Contact, "", "")</li>
-
-                    <li>
-                        <a href="@Url.Action("ChangeCulture", "Home", new { lang = "en"})">eng</a>
-                    </li> |
-                    <li>
-                        <a href="@Url.Action("ChangeCulture", "Home", new { lang = "ru"})">rus</a>
-                    </li> |
-                    <li>
-                        <a href="@Url.Action("ChangeCulture", "Home", new { lang = "am"})">arm</a>
-                    </li>
                 </ul>
+
+                <a href="@Url.Action("ChangeCulture", "Home", new { lang = "en"})">eng</a> |
+                <a href="@Url.Action("ChangeCulture", "Home", new { lang = "ru"})">rus</a> |
+                <a href="@Url.Action("ChangeCulture", "Home", new { lang = "am"})">arm</a>
             </div>
         </div>
 

@@ -126,6 +126,9 @@
   <data name="Home" xml:space="preserve">
     <value>Գլխավոր</value>
   </data>
+  <data name="Please_enter_your_name" xml:space="preserve">
+    <value>Մուտքագրեք Ձեր անունը</value>
+  </data>
   <data name="Portfolio" xml:space="preserve">
     <value>Պորտֆոլիո</value>
   </data>
