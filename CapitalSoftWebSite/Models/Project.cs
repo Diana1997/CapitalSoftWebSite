@@ -16,5 +16,7 @@ namespace CapitalSoftWebSite.Models
         public string Description { set; get; }
         public ICollection<Image> Images { set; get; }
         public ICollection<Technology> Technologies { set; get; }
+        public int? LanguageID { set; get; }
+        public Language Language { set; get; }
     }
 }

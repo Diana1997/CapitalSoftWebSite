@@ -14,7 +14,6 @@ namespace CapitalSoftWebSite.Models
         public DbSet<Image> Images { set; get; }
         public DbSet<Language> Languages { set; get; }
         public DbSet<Project> Projects { set; get; }
-        public DbSet<Contact> Contacts { set; get; }
         public DbSet<TeamMember> TeamMembers { set; get; }
         public DbSet<Technology> Technologies { set; get; }
     }
