@@ -79,11 +79,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact us.
+        /// </summary>
+        public static string Contact_Us {
+            get {
+                return ResourceManager.GetString("Contact_Us", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is required.
+        /// </summary>
+        public static string Name_Required {
+            get {
+                return ResourceManager.GetString("Name_Required", resourceCulture);
             }
         }
         

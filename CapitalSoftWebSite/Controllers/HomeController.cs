@@ -1,40 +1,51 @@
 ﻿using CapitalSoftWebSite.Filters;
+using CapitalSoftWebSite.Models;
+using CapitalSoftWebSite.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
 namespace CapitalSoftWebSite.Controllers
 {
-    [Culture]
+    
     public class HomeController : Controller
     {
+        [Culture]
         public ActionResult Index()
         {
-            return View();
+            var model = new HomePageModel();
+            model.TeamMembers = new DbAdaptor().GetTeamMember().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            return View(model);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        /// <summary>
-        /// Change web page language
-        /// </summary>
-        /// <param name="lang"></param>
-        /// <returns></returns>
+        [Culture]
         public ActionResult ChangeCulture(string lang)
+        {
+            ChangeLang(lang);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Send(Contact contact, string lang)
+        {
+           // ChangeLang(lang);
+            if (ModelState.IsValid)
+            {
+                using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                {
+                    db.Contacts.Add(contact);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("index");
+            }
+            return View("~/Views/Home/Index.cshtml", new HomePageModel { Contact = contact });
+        }
+
+        private void ChangeLang(string lang)
         {
             List<string> cultures = new List<string>() { "ru", "en", "am" };
             if (!cultures.Contains(lang))
@@ -43,7 +54,7 @@ namespace CapitalSoftWebSite.Controllers
             }
             HttpCookie cookie = Request.Cookies["lang"];
             if (cookie != null)
-                cookie.Value = lang;  
+                cookie.Value = lang;
             else
             {
 
@@ -53,7 +64,14 @@ namespace CapitalSoftWebSite.Controllers
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-            return RedirectToAction("Index");
+        }
+
+        public FileContentResult GetImage(int imageId)
+        {
+            Image image = new DbAdaptor().GetImage(imageId);
+            if (image != null)
+                return File(image.ImageData, image.ImageMimeType);
+            return null;
         }
     }
 }

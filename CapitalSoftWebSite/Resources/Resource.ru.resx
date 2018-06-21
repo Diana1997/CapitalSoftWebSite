@@ -123,8 +123,14 @@
   <data name="Contact" xml:space="preserve">
     <value>Контакт</value>
   </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>Связаться с Нами</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
+  </data>
+  <data name="Name_Required" xml:space="preserve">
+    <value>Требуется имя</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Пожалуйста, введите Ваше имя</value>

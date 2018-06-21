@@ -150,21 +150,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LanguagesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TeamMembersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TechnologiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImagesController.cs" />
-    <Compile Include="Controllers\LanguagesController.cs" />
-    <Compile Include="Controllers\ProjectsController.cs" />
-    <Compile Include="Controllers\TeamMembersController.cs" />
-    <Compile Include="Controllers\TechnologiesController.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Models\ConnectionParameters.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\DbAdaptor.cs" />
     <Compile Include="Models\Image.cs" />
-    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Technology.cs" />
@@ -184,6 +181,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.ru.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\HomePageModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -199,11 +197,16 @@
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TeamMembers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TeamMembers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TeamMembers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TeamMembers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TeamMembers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Technologies\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Technologies\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Technologies\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Technologies\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Technologies\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -229,31 +232,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Technologies\Create.cshtml" />
-    <Content Include="Views\Technologies\Delete.cshtml" />
-    <Content Include="Views\Technologies\Details.cshtml" />
-    <Content Include="Views\Technologies\Edit.cshtml" />
-    <Content Include="Views\Technologies\Index.cshtml" />
-    <Content Include="Views\Images\Create.cshtml" />
-    <Content Include="Views\Images\Delete.cshtml" />
-    <Content Include="Views\Images\Details.cshtml" />
-    <Content Include="Views\Images\Edit.cshtml" />
-    <Content Include="Views\Images\Index.cshtml" />
-    <Content Include="Views\TeamMembers\Create.cshtml" />
-    <Content Include="Views\TeamMembers\Delete.cshtml" />
-    <Content Include="Views\TeamMembers\Details.cshtml" />
-    <Content Include="Views\TeamMembers\Edit.cshtml" />
-    <Content Include="Views\TeamMembers\Index.cshtml" />
-    <Content Include="Views\Languages\Create.cshtml" />
-    <Content Include="Views\Languages\Delete.cshtml" />
-    <Content Include="Views\Languages\Details.cshtml" />
-    <Content Include="Views\Languages\Edit.cshtml" />
-    <Content Include="Views\Languages\Index.cshtml" />
-    <Content Include="Views\Projects\Create.cshtml" />
-    <Content Include="Views\Projects\Delete.cshtml" />
-    <Content Include="Views\Projects\Details.cshtml" />
-    <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

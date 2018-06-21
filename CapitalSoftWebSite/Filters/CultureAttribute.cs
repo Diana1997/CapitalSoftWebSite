@@ -9,7 +9,7 @@ namespace CapitalSoftWebSite.Filters
 {
     public class CultureAttribute : FilterAttribute, IActionFilter
     {
-        public static string cultureName;
+        public static string cultureName = "en";
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
             HttpCookie cultureCookie = filterContext.HttpContext.Request.Cookies["lang"];

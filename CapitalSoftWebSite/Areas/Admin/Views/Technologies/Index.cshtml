@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CapitalSoftWebSite.Models.Language>
+﻿@model IEnumerable<CapitalSoftWebSite.Models.Technology>
 
 @{
     Layout = null;
@@ -18,7 +18,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Lang)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th></th>
         </tr>
@@ -26,12 +26,12 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Lang)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.LanguageID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.LanguageID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.LanguageID })
+                @Html.ActionLink("Edit", "Edit", new { id=item.TechnologyID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.TechnologyID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.TechnologyID })
             </td>
         </tr>
     }

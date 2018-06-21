@@ -8,20 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using CapitalSoftWebSite.Models;
 
-namespace CapitalSoftWebSite.Controllers
+namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
     public class TeamMembersController : Controller
     {
-        private AppDbContext db = new AppDbContext("DefaultConnection");
+        private AppDbContext db = new AppDbContext();
 
-        // GET: TeamMembers
         public ActionResult Index()
         {
-            var teamMembers = db.TeamMembers.Include(t => t.Image).Include(t => t.Language);
-            return View(teamMembers.ToList());
+            return View(new DbAdaptor().GetTeamMember());
         }
 
-        // GET: TeamMembers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,34 +33,50 @@ namespace CapitalSoftWebSite.Controllers
             return View(teamMember);
         }
 
-        // GET: TeamMembers/Create
         public ActionResult Create()
         {
             ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType");
-            ViewBag.LanguageID = new SelectList(db.Languages, "LanguageID", "Lang");
+            ViewBag.Lang = new SelectList( new List<SelectListItem> {
+                    new SelectListItem {Text = "en", Value = "en"},
+                    new SelectListItem {Text = "ru", Value = "ru"},
+                    new SelectListItem {Text = "am", Value = "am"}, }, 
+                    "Value", "Text");
             return View();
         }
 
-        // POST: TeamMembers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeamMemberID,Firstname,Lastname,Position,LanguageID,ImageId")] TeamMember teamMember)
+        public ActionResult Create(TeamMember teamMember, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.TeamMembers.Add(teamMember);
-                db.SaveChanges();
+                Image img = null;
+                if (file != null)
+                {
+                    img = new Image { ImageData = new byte[file.ContentLength], ImageMimeType = file.ContentType, };
+                    file.InputStream.Read(img.ImageData, 0, file.ContentLength);
+                }
+
+                new DbAdaptor().CreateTeamMember(new TeamMember
+                {
+                    Firstname = teamMember.Firstname,
+                    Lastname = teamMember.Lastname,
+                    Position = teamMember.Position,
+                    Lang = teamMember.Lang,
+                    Image = img,
+                });
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
-            ViewBag.LanguageID = new SelectList(db.Languages, "LanguageID", "Lang", teamMember.LanguageID);
+            ViewBag.Lang = new SelectList(new List<SelectListItem> {
+                    new SelectListItem {Text = "en", Value = "en"},
+                    new SelectListItem {Text = "ru", Value = "ru"},
+                    new SelectListItem {Text = "am", Value = "am"}, },
+                    "Value", "Text");
+            //ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
             return View(teamMember);
         }
 
-        // GET: TeamMembers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,13 +89,9 @@ namespace CapitalSoftWebSite.Controllers
                 return HttpNotFound();
             }
             ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
-            ViewBag.LanguageID = new SelectList(db.Languages, "LanguageID", "Lang", teamMember.LanguageID);
             return View(teamMember);
         }
 
-        // POST: TeamMembers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TeamMemberID,Firstname,Lastname,Position,LanguageID,ImageId")] TeamMember teamMember)
@@ -94,11 +103,9 @@ namespace CapitalSoftWebSite.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
-            ViewBag.LanguageID = new SelectList(db.Languages, "LanguageID", "Lang", teamMember.LanguageID);
             return View(teamMember);
         }
 
-        // GET: TeamMembers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +120,6 @@ namespace CapitalSoftWebSite.Controllers
             return View(teamMember);
         }
 
-        // POST: TeamMembers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

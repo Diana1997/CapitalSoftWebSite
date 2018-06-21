@@ -123,8 +123,14 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Name_Required" xml:space="preserve">
+    <value>Name is required</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Please enter your name</value>

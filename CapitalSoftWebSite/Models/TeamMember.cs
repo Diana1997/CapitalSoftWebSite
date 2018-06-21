@@ -15,9 +15,7 @@ namespace CapitalSoftWebSite.Models
         public string Lastname { set; get; }
         [Required]
         public string Position { set; get; }
-        [Required]
-        public int?  LanguageID { set; get; }
-        public Language Language { set; get; }
+        public string Lang { set; get; }
         public int? ImageId { set; get; }
         public Image Image { set; get; }
     }

@@ -123,8 +123,14 @@
   <data name="Contact" xml:space="preserve">
     <value>Հետադարձ կապ </value>
   </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>Հետադարձ կապ</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Գլխավոր</value>
+  </data>
+  <data name="Name_Required" xml:space="preserve">
+    <value>Անուն դաշտ  պարտադիր է</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Մուտքագրեք Ձեր անունը</value>

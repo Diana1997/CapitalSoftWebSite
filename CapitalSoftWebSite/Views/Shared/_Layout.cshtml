@@ -17,20 +17,25 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink(Resources.Resource.Home, "", "")</li>
-                    <li>@Html.ActionLink(Resources.Resource.Services, "")</li>
-                    <li>@Html.ActionLink(Resources.Resource.Portfolio, "", "")</li>
-                    <li>@Html.ActionLink(Resources.Resource.About, "", "")</li>
-                    <li>@Html.ActionLink(Resources.Resource.Team, "", "")</li>
-                    <li>@Html.ActionLink(Resources.Resource.Contact, "", "")</li>
-                </ul>
+            <nav>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink(Resources.Resource.Home, "", "")</li>
+                        <li>@Html.ActionLink(Resources.Resource.Services, "")</li>
+                        <li>@Html.ActionLink(Resources.Resource.Portfolio, "", "")</li>
+                        <li>@Html.ActionLink(Resources.Resource.About, "", "")</li>
+                        <li>@Html.ActionLink(Resources.Resource.Team, "", "")</li>
+                        @*  <li>@Html.ActionLink(Resources.Resource.Contact, "", "")</li>*@
+                        <li>
+                            <a href="#contact">@Resources.Resource.Contact</a>
+                        </li>
+                    </ul>
 
-                <a href="@Url.Action("ChangeCulture", "Home", new { lang = "en"})">eng</a> |
-                <a href="@Url.Action("ChangeCulture", "Home", new { lang = "ru"})">rus</a> |
-                <a href="@Url.Action("ChangeCulture", "Home", new { lang = "am"})">arm</a>
-            </div>
+                    <a href="@Url.Action("ChangeCulture", "Home", new { lang = "en"})">eng</a> |
+                    <a href="@Url.Action("ChangeCulture", "Home", new { lang = "ru"})">rus</a> |
+                    <a href="@Url.Action("ChangeCulture", "Home", new { lang = "am"})">arm</a>
+                </div>
+            </nav>
         </div>
 
 

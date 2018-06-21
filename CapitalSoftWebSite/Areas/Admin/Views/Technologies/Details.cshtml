@@ -1,4 +1,4 @@
-﻿@model CapitalSoftWebSite.Models.Language
+﻿@model CapitalSoftWebSite.Models.Technology
 
 @{
     Layout = null;
@@ -13,21 +13,21 @@
 </head>
 <body>
     <div>
-        <h4>Language</h4>
+        <h4>Technology</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Lang)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Lang)
+                @Html.DisplayFor(model => model.Name)
             </dd>
     
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.LanguageID }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TechnologyID }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>
