@@ -10,5 +10,6 @@ namespace CapitalSoftWebSite.ViewModel
     {
         public Contact Contact { set; get; }
         public IList<TeamMember> TeamMembers { set; get; }
+        public IList<Project> Projects { set; get; }
     }
 }

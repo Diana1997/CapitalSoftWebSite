@@ -82,6 +82,66 @@ namespace CapitalSoftWebSite.Models
 
         #endregion
 
+        #region Project
+        public int CreateProject(Project project)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Projects.Add(project);
+                db.SaveChanges();
+                return project.ProjectID;
+            }
+        }
+        public IList<Project> GetProjects()
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return db.Projects.Include(x=> x.Images).ToList();
+        }
 
+        //public IList<Project> GetProjectsHome()
+        //{
+        //    using (var db = new AppDbContext(ConnectionParameters.connectionString))
+        //    {
+        //        IList<Project> projectList = new List<Project>();
+        //        foreach(var elem in db.Projects)
+        //        {
+        //            elem.ProjectTechnologies = db.ProjectTechnologies.Where(x => x.P)
+        //        }
+        //    }
+               
+        //}
+        public Project GetProject(int? id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return db.Projects.Find(id);
+        }
+
+        public void DeleteProject(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                Project project = db.Projects
+                    .Include(x => x.Images)
+                    .Where(x => x.ProjectID == id)
+                    .ToList()
+                    .FirstOrDefault();
+                db.Images.RemoveRange(project.Images);
+                db.Projects.Remove(project);
+                db.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region ProjectTechnology
+        public int? CreateProjectTechnology(ProjectTechnology projectTechnology)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.ProjectTechnologies.Add(projectTechnology);
+                db.SaveChanges();
+                return projectTechnology.ProjectID;
+            }
+        }
+        #endregion
     }
 }

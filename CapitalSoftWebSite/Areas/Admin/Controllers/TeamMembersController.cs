@@ -73,7 +73,6 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                     new SelectListItem {Text = "ru", Value = "ru"},
                     new SelectListItem {Text = "am", Value = "am"}, },
                     "Value", "Text");
-            //ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
             return View(teamMember);
         }
 

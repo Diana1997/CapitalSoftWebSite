@@ -4,7 +4,26 @@
 
     ViewBag.Title = "Home Page";
 }
+<section id="portfolio">
+    <div>
+        <h2>Portfolio</h2>
+        @foreach (var item in Model.Projects)
+        {
+            <p>@item.Name</p>
+            <p>@item.Description</p>
+            foreach (var elem in item.Images)
+            {
+                <div>
+                    <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" />
+                </div>
+            }
+            <hr />
+        }
+                    
+    </div>
+</section>
 <section id="team">
+    <h2>Team</h2>
     @foreach (var item in Model.TeamMembers)
     {
         <p>@item.Firstname</p>
@@ -16,8 +35,6 @@
         <hr />
     }
 </section>
-
-
 
 <section id="contact">
     <h3>@Resources.Resource.Contact_Us</h3>

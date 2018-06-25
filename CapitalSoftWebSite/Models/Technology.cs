@@ -11,6 +11,6 @@ namespace CapitalSoftWebSite.Models
         public int TechnologyID { set; get; }
         [Required]
         public string Name { set; get; }
-
+        public ICollection<ProjectTechnology> ProjectTechnologies { set; get; }
     }
 }

@@ -19,6 +19,7 @@ namespace CapitalSoftWebSite.Controllers
         {
             var model = new HomePageModel();
             model.TeamMembers = new DbAdaptor().GetTeamMember().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.Projects = new DbAdaptor().GetProjects().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
             return View(model);
         }
 
@@ -32,7 +33,6 @@ namespace CapitalSoftWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Send(Contact contact, string lang)
         {
-           // ChangeLang(lang);
             if (ModelState.IsValid)
             {
                 using (var db = new AppDbContext(ConnectionParameters.connectionString))

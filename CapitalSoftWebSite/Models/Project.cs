@@ -15,7 +15,7 @@ namespace CapitalSoftWebSite.Models
         [MaxLength(4000)]
         public string Description { set; get; }
         public ICollection<Image> Images { set; get; }
-        public ICollection<Technology> Technologies { set; get; }
         public string Lang { set; get; }
+        public ICollection<ProjectTechnology> ProjectTechnologies { set; get; } 
     }
 }
