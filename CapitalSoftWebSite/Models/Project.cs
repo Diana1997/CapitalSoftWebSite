@@ -16,6 +16,11 @@ namespace CapitalSoftWebSite.Models
         public string Description { set; get; }
         public ICollection<Image> Images { set; get; }
         public string Lang { set; get; }
-        public ICollection<ProjectTechnology> ProjectTechnologies { set; get; } 
+        public virtual ICollection<Technology> Technologies { set; get; } 
+
+        public Project()
+        {
+            this.Technologies = new HashSet<Technology>();
+        }
     }
 }

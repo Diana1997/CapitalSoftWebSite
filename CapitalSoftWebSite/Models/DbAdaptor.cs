@@ -132,16 +132,5 @@ namespace CapitalSoftWebSite.Models
         }
         #endregion
 
-        #region ProjectTechnology
-        public int? CreateProjectTechnology(ProjectTechnology projectTechnology)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.ProjectTechnologies.Add(projectTechnology);
-                db.SaveChanges();
-                return projectTechnology.ProjectID;
-            }
-        }
-        #endregion
     }
 }

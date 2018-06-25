@@ -11,6 +11,10 @@ namespace CapitalSoftWebSite.Models
         public int TechnologyID { set; get; }
         [Required]
         public string Name { set; get; }
-        public ICollection<ProjectTechnology> ProjectTechnologies { set; get; }
+        public virtual ICollection<Project> Projects { set; get; }
+        public Technology()
+        {
+            this.Projects = new HashSet<Project>();
+        }
     }
 }

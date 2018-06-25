@@ -164,7 +164,6 @@
     <Compile Include="Models\DbAdaptor.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\ProjectTechnology.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Technology.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
