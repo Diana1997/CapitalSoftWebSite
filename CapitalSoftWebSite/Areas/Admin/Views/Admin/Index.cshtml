@@ -1,24 +1,20 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-       Hello!!! This is Admin panel!!!
+<div>
+    <div>
+        Hello!!! This is Admin panel!!!
     </div>
-   <div>
-       @Html.ActionLink("Add team member", "Index", "TeamMembers")
-   </div>
-   <div>
-       @Html.ActionLink("Technology", "Index", "Technologies")
-   </div>
-</body>
-</html>
+    <div>
+        @Html.ActionLink("Team member", "Index", "TeamMembers")
+    </div>
+    <div>
+        @Html.ActionLink("Technology", "Index", "Technologies")
+    </div>
+    <div>
+        @Html.ActionLink("Project", "Index", "Projects")
+    </div>
+</div>
+

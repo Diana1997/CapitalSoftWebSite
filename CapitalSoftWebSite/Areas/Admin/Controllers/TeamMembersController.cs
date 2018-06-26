@@ -16,20 +16,18 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View(new DbAdaptor().GetTeamMember());
+            return View(new DbAdaptor().GetTeamMembers());
         }
 
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TeamMember teamMember = db.TeamMembers.Find(id);
+
+            TeamMember teamMember = new DbAdaptor().GetTeamMember(id);
             if (teamMember == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(teamMember);
         }
 
@@ -108,14 +106,11 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TeamMember teamMember = db.TeamMembers.Find(id);
+
+            TeamMember teamMember = new DbAdaptor().GetTeamMember(id);
             if (teamMember == null)
-            {
                 return HttpNotFound();
-            }
             return View(teamMember);
         }
 
@@ -123,9 +118,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TeamMember teamMember = db.TeamMembers.Find(id);
-            db.TeamMembers.Remove(teamMember);
-            db.SaveChanges();
+            new DbAdaptor().DeleteTeamMember(id);
             return RedirectToAction("Index");
         }
 
@@ -136,6 +129,13 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public FileContentResult GetImage(int imageId)
+        {
+            Image image = new DbAdaptor().GetImage(imageId);
+            if (image != null)
+                return File(image.ImageData, image.ImageMimeType);
+            return null;
         }
     }
 }

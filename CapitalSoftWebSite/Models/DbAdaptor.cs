@@ -16,10 +16,31 @@ namespace CapitalSoftWebSite.Models
                 return teamMember.TeamMemberID;
             }
         }
-        public IList<TeamMember> GetTeamMember()
+        public IList<TeamMember> GetTeamMembers()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
                 return db.TeamMembers.Include(t => t.Image).ToList();
+        }
+        public TeamMember GetTeamMember(int? id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return db.TeamMembers.Include(x => x.Image).Where(x => x.TeamMemberID == id).FirstOrDefault();
+        }
+
+        public void DeleteTeamMember(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                TeamMember teamMember = db.TeamMembers
+                    .Include(x => x.Image)
+                    .Where(x => x.TeamMemberID == id)
+                    .FirstOrDefault();
+                if (teamMember.Image != null)
+                    db.Images.Remove(teamMember.Image);
+                db.TeamMembers.Remove(teamMember);
+                db.SaveChanges();
+            }
+               
         }
         #endregion
 
@@ -98,18 +119,25 @@ namespace CapitalSoftWebSite.Models
                 return db.Projects.Include(x=> x.Images).ToList();
         }
 
-        //public IList<Project> GetProjectsHome()
-        //{
-        //    using (var db = new AppDbContext(ConnectionParameters.connectionString))
-        //    {
-        //        IList<Project> projectList = new List<Project>();
-        //        foreach(var elem in db.Projects)
-        //        {
-        //            elem.ProjectTechnologies = db.ProjectTechnologies.Where(x => x.P)
-        //        }
-        //    }
-               
-        //}
+        public IList<Project> GetProjectsHome()
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                var projectList = db.Projects.Include(x => x.Images).ToList();
+                foreach (var elem in projectList)
+                {
+                    var ptList = db.ProjectTechnologies.Where(x => x.ProjectID == elem.ProjectID).ToList();
+                    foreach(var k in ptList)
+                    {
+                        var technolgy = db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
+                        if(technolgy != null)
+                            elem.Technologies.Add(technolgy);
+                    }
+                }
+                return projectList;
+            }
+            
+        }
         public Project GetProject(int? id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
@@ -128,6 +156,18 @@ namespace CapitalSoftWebSite.Models
                 db.Images.RemoveRange(project.Images);
                 db.Projects.Remove(project);
                 db.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region ProjectTechnology
+        public int CreateProjectTechnology(ProjectTechnology projectTechnology)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.ProjectTechnologies.Add(projectTechnology);
+                db.SaveChanges();
+                return projectTechnology.ProjectTechnologyID;
             }
         }
         #endregion

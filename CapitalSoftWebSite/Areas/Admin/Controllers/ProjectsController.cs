@@ -69,14 +69,14 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                      Images = imageList,
                      Lang = project.Lang,
                 });
-                //foreach(var elem in TechnologyID)
-                //{
-                //    dbAdaptor.CreateProjectTechnology(new ProjectTechnology
-                //    {
-                //        ProjectID = projectId,
-                //        TechnologyID = elem,
-                //    });
-                //}
+                foreach (var elem in TechnologyID)
+                {
+                    dbAdaptor.CreateProjectTechnology(new ProjectTechnology
+                    {
+                        ProjectID = projectId,
+                        TechnologyID = elem,
+                    });
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.Lang = new SelectList(new List<SelectListItem> {

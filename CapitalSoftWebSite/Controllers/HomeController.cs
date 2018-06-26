@@ -18,8 +18,8 @@ namespace CapitalSoftWebSite.Controllers
         public ActionResult Index()
         {
             var model = new HomePageModel();
-            model.TeamMembers = new DbAdaptor().GetTeamMember().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjects().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.Projects = new DbAdaptor().GetProjectsHome().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
             return View(model);
         }
 

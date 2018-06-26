@@ -16,9 +16,5 @@ namespace CapitalSoftWebSite.Models
         public string ImageMimeType { set; get; }
 
         public ICollection<TeamMember> TeamMembers { set; get; }
-        public Image()
-        {
-            TeamMembers = new List<TeamMember>();
-        }
     }
 }

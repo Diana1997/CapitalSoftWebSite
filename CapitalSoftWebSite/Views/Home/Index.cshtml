@@ -14,10 +14,15 @@
             foreach (var elem in item.Images)
             {
                 <div>
-                    <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" />
+                    <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300"/>
                 </div>
             }
-            <hr />
+            <ul>
+               @foreach (var elem in item.Technologies)
+               {
+                  <li>@elem.Name</li>
+               }
+            </ul>
         }
                     
     </div>
