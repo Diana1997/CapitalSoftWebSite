@@ -7,38 +7,49 @@
 <section id="portfolio">
     <div>
         <h2>Portfolio</h2>
-        @foreach (var item in Model.Projects)
+        @if (Model.Projects != null)
         {
-            <p>@item.Name</p>
-            <p>@item.Description</p>
-            foreach (var elem in item.Images)
+            foreach (var item in Model.Projects)
             {
-                <div>
-                    <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300"/>
-                </div>
+                <p>@item.Name</p>
+                <p>@item.Description</p>
+                foreach (var elem in item.Images)
+                {
+                    <div>
+                        <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
+                    </div>
+                }
+                <ul>
+                    @foreach (var elem in item.Technologies)
+                    {
+                        <li>@elem.Name</li>
+                    }
+                </ul>
             }
-            <ul>
-               @foreach (var elem in item.Technologies)
-               {
-                  <li>@elem.Name</li>
-               }
-            </ul>
         }
-                    
+
+
     </div>
 </section>
 <section id="team">
     <h2>Team</h2>
-    @foreach (var item in Model.TeamMembers)
+    @if (Model.TeamMembers != null)
     {
-        <p>@item.Firstname</p>
-        <span>@item.Lastname</span>
-        <p>@item.Position</p>
-        <div>
-            <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" />
-        </div>
-        <hr />
+        foreach (var item in Model.TeamMembers)
+        {
+            <p>@item.Firstname</p>
+            <span>@item.Lastname</span>
+            <p>@item.Position</p>
+            if (item.Image != null)
+            {
+                <div>
+                    <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300"  />
+                </div>
+            }
+            <hr />
+        }
     }
+
 </section>
 
 <section id="contact">

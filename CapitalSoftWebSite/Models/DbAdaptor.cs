@@ -40,7 +40,14 @@ namespace CapitalSoftWebSite.Models
                 db.TeamMembers.Remove(teamMember);
                 db.SaveChanges();
             }
-               
+        }
+        public void EditTeamMember(TeamMember teamMember)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Entry(teamMember).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
         #endregion
 
@@ -59,6 +66,15 @@ namespace CapitalSoftWebSite.Models
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
                 return db.Images.Find(id);
+        }
+        public void DeleteImage(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                Image image = db.Images.Find(id);
+                db.Images.Remove(image);
+                db.SaveChanges();
+            }
         }
         #endregion
 
@@ -136,7 +152,6 @@ namespace CapitalSoftWebSite.Models
                 }
                 return projectList;
             }
-            
         }
         public Project GetProject(int? id)
         {

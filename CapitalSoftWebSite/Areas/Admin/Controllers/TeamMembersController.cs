@@ -12,7 +12,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
     public class TeamMembersController : Controller
     {
-        private AppDbContext db = new AppDbContext();
+        private static int? imageId { set; get; }
 
         public ActionResult Index()
         {
@@ -33,7 +33,6 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType");
             ViewBag.Lang = new SelectList( new List<SelectListItem> {
                     new SelectListItem {Text = "en", Value = "en"},
                     new SelectListItem {Text = "ru", Value = "ru"},
@@ -77,29 +76,56 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TeamMember teamMember = db.TeamMembers.Find(id);
+
+            TeamMember teamMember = new DbAdaptor().GetTeamMember(id);
+
+            imageId = teamMember.Image?.ImageID;
+
             if (teamMember == null)
-            {
                 return HttpNotFound();
-            }
-            ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
+
+            ViewBag.Lang = new SelectList(new List<SelectListItem> {
+                    new SelectListItem {Text = "en", Value = "en"},
+                    new SelectListItem {Text = "ru", Value = "ru"},
+                    new SelectListItem {Text = "am", Value = "am"}, },
+            "Value", "Text");
             return View(teamMember);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TeamMemberID,Firstname,Lastname,Position,LanguageID,ImageId")] TeamMember teamMember)
+        public ActionResult Edit(TeamMember teamMember, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(teamMember).State = EntityState.Modified;
-                db.SaveChanges();
+                TeamMember teamMemberEdit = new TeamMember
+                {
+                    TeamMemberID = teamMember.TeamMemberID,
+                    Firstname = teamMember.Firstname,
+                    Lastname = teamMember.Lastname,
+                    Position = teamMember.Position,
+                    Lang = teamMember.Lang,
+                };
+                if (file != null)
+                {
+                    var img = new Image { ImageData = new byte[file.ContentLength], ImageMimeType = file.ContentType, };
+                    file.InputStream.Read(img.ImageData, 0, file.ContentLength);
+                    teamMemberEdit.ImageId = new DbAdaptor().CreateImage(img);
+                }
+                else
+                    teamMemberEdit.ImageId = imageId;
+
+                
+                new DbAdaptor().EditTeamMember(teamMemberEdit);
                 return RedirectToAction("Index");
             }
-            ViewBag.ImageId = new SelectList(db.Images, "ImageID", "ImageMimeType", teamMember.ImageId);
+
+            ViewBag.Lang = new SelectList(new List<SelectListItem> {
+                    new SelectListItem {Text = "en", Value = "en"},
+                    new SelectListItem {Text = "ru", Value = "ru"},
+                    new SelectListItem {Text = "am", Value = "am"}, },
+            "Value", "Text");
             return View(teamMember);
         }
 
@@ -122,20 +148,27 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
         public FileContentResult GetImage(int imageId)
         {
             Image image = new DbAdaptor().GetImage(imageId);
             if (image != null)
                 return File(image.ImageData, image.ImageMimeType);
             return null;
+        }
+
+        public ActionResult  DeleteImage(TeamMember teamMember, int imgDeleteID)
+        {
+            new DbAdaptor().EditTeamMember(new TeamMember
+            {
+                TeamMemberID = teamMember.TeamMemberID,
+                Firstname = teamMember.Firstname,
+                Lastname = teamMember.Lastname,
+                Lang = teamMember.Lang,
+                Position = teamMember.Position,
+                ImageId = null,
+            });
+            new DbAdaptor().DeleteImage(imgDeleteID);
+            return RedirectToAction("Edit", "TeamMembers", new { id = teamMember.TeamMemberID});
         }
     }
 }
