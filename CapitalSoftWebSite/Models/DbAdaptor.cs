@@ -129,34 +129,55 @@ namespace CapitalSoftWebSite.Models
                 return project.ProjectID;
             }
         }
+
+        public void EditProject(Project project)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Entry(project).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
         public IList<Project> GetProjects()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
                 return db.Projects.Include(x=> x.Images).ToList();
         }
 
-        public IList<Project> GetProjectsHome()
+        public IList<Project> GetProjectsFull()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
+                Technology technology = null;
                 var projectList = db.Projects.Include(x => x.Images).ToList();
                 foreach (var elem in projectList)
                 {
                     var ptList = db.ProjectTechnologies.Where(x => x.ProjectID == elem.ProjectID).ToList();
                     foreach(var k in ptList)
                     {
-                        var technolgy = db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
-                        if(technolgy != null)
-                            elem.Technologies.Add(technolgy);
+                        technology = db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
+                        if(technology != null)
+                            elem.Technologies.Add(technology);
                     }
                 }
                 return projectList;
             }
         }
+       
         public Project GetProject(int? id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.Projects.Find(id);
+            {
+                Technology technology = null;
+                Project project = db.Projects.Include(x => x.Images).Where(x => x.ProjectID == id).FirstOrDefault();
+                var projectTechnologies = db.ProjectTechnologies.Where(x => x.ProjectID == project.ProjectID).ToList();
+                foreach(var elem in projectTechnologies)
+                {
+                    technology = db.Technologies.Where(x => x.TechnologyID == elem.TechnologyID).FirstOrDefault();
+                    project.Technologies.Add(technology);
+                }
+                return project;
+            }
         }
 
         public void DeleteProject(int id)
@@ -168,6 +189,8 @@ namespace CapitalSoftWebSite.Models
                     .Where(x => x.ProjectID == id)
                     .ToList()
                     .FirstOrDefault();
+                var ptList = db.ProjectTechnologies.Where(x => x.ProjectID == project.ProjectID);
+                db.ProjectTechnologies.RemoveRange(ptList);
                 db.Images.RemoveRange(project.Images);
                 db.Projects.Remove(project);
                 db.SaveChanges();
@@ -185,7 +208,50 @@ namespace CapitalSoftWebSite.Models
                 return projectTechnology.ProjectTechnologyID;
             }
         }
+        public void DeleteProjectTechnology(int projectID, int technologyID)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                ProjectTechnology projectTechnology = db.ProjectTechnologies
+                    .Where(x => x.ProjectID == projectID && x.TechnologyID == technologyID)
+                    .FirstOrDefault();
+                db.ProjectTechnologies.Remove(projectTechnology);
+                db.SaveChanges();
+            }
+        }
         #endregion
 
+        #region Contact
+        public int CreateContact(Contact contact)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Contacts.Add(contact);
+                db.SaveChanges();
+                return contact.ContactID;
+            }
+        }
+        public IList<Contact> GetContacts()
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return db.Contacts.ToList();
+        }
+        
+        public Contact GetContact(int? id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return db.Contacts.Find(id);
+        }
+
+        public void DeleteContact(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                Contact contact = db.Contacts.Find(id);
+                db.Contacts.Remove(contact);
+                db.SaveChanges();
+            }
+        }
+        #endregion
     }
 }

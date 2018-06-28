@@ -20,9 +20,12 @@
                     </div>
                 }
                 <ul>
-                    @foreach (var elem in item.Technologies)
+                    @if (Model.TeamMembers != null)
+                    {
+                    foreach (var elem in item.Technologies)
                     {
                         <li>@elem.Name</li>
+                    }
                     }
                 </ul>
             }
@@ -79,7 +82,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Message, new { htmlAttributes = new { placeholder = "Message" } })
+                    @Html.TextAreaFor(m => m.Contact.Message, new { placeholder = "Message" } )
                     @Html.ValidationMessageFor(model => model.Contact.Message, "", new { @class = "text-danger" })
                 </div>
             </div>

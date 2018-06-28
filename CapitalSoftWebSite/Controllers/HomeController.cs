@@ -14,12 +14,13 @@ namespace CapitalSoftWebSite.Controllers
     
     public class HomeController : Controller
     {
+
         [Culture]
         public ActionResult Index()
         {
             var model = new HomePageModel();
             model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjectsHome().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
             return View(model);
         }
 
@@ -31,18 +32,19 @@ namespace CapitalSoftWebSite.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Send(Contact contact, string lang)
+        public ActionResult Send(Contact contact)
         {
             if (ModelState.IsValid)
             {
-                using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                {
-                    db.Contacts.Add(contact);
-                    db.SaveChanges();
-                }
+                new DbAdaptor().CreateContact(contact);
                 return RedirectToAction("index");
             }
-            return View("~/Views/Home/Index.cshtml", new HomePageModel { Contact = contact });
+
+            var model = new HomePageModel();
+            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.Contact = contact;
+            return View("~/Views/Home/Index.cshtml", model);
         }
 
         private void ChangeLang(string lang)

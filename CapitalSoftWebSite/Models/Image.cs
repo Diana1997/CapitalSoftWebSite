@@ -16,5 +16,7 @@ namespace CapitalSoftWebSite.Models
         public string ImageMimeType { set; get; }
 
         public ICollection<TeamMember> TeamMembers { set; get; }
+
+        public int? ProjectID { set; get; }
     }
 }
