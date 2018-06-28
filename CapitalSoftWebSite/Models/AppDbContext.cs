@@ -17,18 +17,6 @@ namespace CapitalSoftWebSite.Models
         public DbSet<Technology> Technologies { set; get; }
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<ProjectTechnology> ProjectTechnologies { set; get; }
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Project>()
-        //        .HasMany<Technology>(t => t.Technologies)
-        //        .WithMany(p => p.Projects)
-        //        .Map(pt =>
-        //        {
-        //            pt.MapLeftKey("ProjectID");
-        //            pt.MapRightKey("TechnologyID");
-        //            pt.ToTable("ProjectTechnology");
-        //        }
-        //   );
-        //}
+
     }
 }

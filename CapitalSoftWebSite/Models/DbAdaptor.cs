@@ -150,13 +150,14 @@ namespace CapitalSoftWebSite.Models
             {
                 Technology technology = null;
                 var projectList = db.Projects.Include(x => x.Images).ToList();
+
                 foreach (var elem in projectList)
                 {
                     var ptList = db.ProjectTechnologies.Where(x => x.ProjectID == elem.ProjectID).ToList();
                     foreach(var k in ptList)
                     {
                         technology = db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
-                        if(technology != null)
+                        if (technology != null)
                             elem.Technologies.Add(technology);
                     }
                 }

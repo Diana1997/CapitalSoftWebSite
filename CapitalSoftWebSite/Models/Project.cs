@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -16,6 +17,7 @@ namespace CapitalSoftWebSite.Models
         public string Description { set; get; }
         public ICollection<Image> Images { set; get; }
         public string Lang { set; get; }
-        public virtual ICollection<Technology> Technologies { set; get; } 
+        [NotMapped]
+        public virtual ICollection<Technology> Technologies { set; get; } = new List<Technology>();
     }
 }

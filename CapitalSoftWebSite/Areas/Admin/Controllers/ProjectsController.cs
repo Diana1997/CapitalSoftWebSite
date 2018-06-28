@@ -103,7 +103,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
             var list1 = new DbAdaptor().GetTechnologies()?.ToList();
             var list2 = project.Technologies?.ToList();
 
-            if(list2 != null)
+            if (list2 != null)
             {
                 var list3 = list1.Where(x => !list2.Contains(x)).ToList();
                 ViewBag.TechnologyID = new MultiSelectList(list3, "TechnologyID", "Name");
@@ -130,14 +130,18 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                     }
                 }
 
-                foreach (var elem in TechnologyID)
+                if(TechnologyID != null)
                 {
-                    dbAdaptor.CreateProjectTechnology(new ProjectTechnology
+                    foreach (var elem in TechnologyID)
                     {
-                        ProjectID = project.ProjectID,
-                        TechnologyID = elem,
-                    });
+                        dbAdaptor.CreateProjectTechnology(new ProjectTechnology
+                        {
+                            ProjectID = project.ProjectID,
+                            TechnologyID = elem,
+                        });
+                    }
                 }
+
                 dbAdaptor.EditProject(project);
                 return RedirectToAction("Index");
             }
