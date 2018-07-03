@@ -17,7 +17,7 @@ namespace CapitalSoftWebSite
                 name: "Default",
                 url: "{lang}/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, lang = "en" },
-                constraints: new { lang = @"en|ru|am"}
+                constraints: new { lang = @"en|ru|am" }
             );
         }
     }

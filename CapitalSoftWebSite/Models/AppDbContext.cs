@@ -17,6 +17,5 @@ namespace CapitalSoftWebSite.Models
         public DbSet<Technology> Technologies { set; get; }
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<ProjectTechnology> ProjectTechnologies { set; get; }
-
     }
 }

@@ -6,8 +6,9 @@ using System.Web.Mvc;
 
 namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
-    public class AdminController : Controller 
+    public class AdminController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();

@@ -22,5 +22,13 @@ namespace CapitalSoftWebSite.Models
                 return false;
             return this.TechnologyID == that.TechnologyID && this.Name == that.Name;
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1107042776;
+            hashCode = hashCode * -1521134295 + TechnologyID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            return hashCode;
+        }
     }
 }
