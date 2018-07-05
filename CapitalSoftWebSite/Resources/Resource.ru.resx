@@ -129,6 +129,9 @@
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
   <data name="Name_Required" xml:space="preserve">
     <value>Требуется имя</value>
   </data>

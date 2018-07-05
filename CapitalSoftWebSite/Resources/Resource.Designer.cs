@@ -97,7 +97,16 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name is required.
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is required 212125.
         /// </summary>
         public static string Name_Required {
             get {

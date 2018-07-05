@@ -15,6 +15,7 @@ namespace CapitalSoftWebSite.Models
         public  string Email { set; get; }
         public string Phone { set; get; }
         [Required]
+        [Display(ResourceType = typeof(Resources.Resource), Name = nameof(Resources.Resource.Message))]
         public string Message { set; get; }
     }
 }

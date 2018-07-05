@@ -12,7 +12,7 @@ namespace CapitalSoftWebSite
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-      //  public static string cultureName;
+     //  public static string cultureName;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

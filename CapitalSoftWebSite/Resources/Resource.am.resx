@@ -129,6 +129,9 @@
   <data name="Home" xml:space="preserve">
     <value>Գլխավոր</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Հաղորդագրություն</value>
+  </data>
   <data name="Name_Required" xml:space="preserve">
     <value>Անուն դաշտ  պարտադիր է</value>
   </data>

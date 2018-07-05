@@ -57,7 +57,7 @@
 
 <section id="contact">
     <h3>@Resources.Resource.Contact_Us</h3>
-    @using (Html.BeginForm("Send", "Home"))
+    @using (Html.BeginForm(@*"Send", "Home"*@))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
