@@ -126,20 +126,32 @@
   <data name="Contact_Us" xml:space="preserve">
     <value>Связаться с Нами</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Эл. адрес</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Сообщение</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя </value>
+  </data>
   <data name="Name_Required" xml:space="preserve">
     <value>Требуется имя</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Пожалуйста, введите Ваше имя</value>
   </data>
   <data name="Portfolio" xml:space="preserve">
     <value>Портфолио</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить </value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Услуги</value>

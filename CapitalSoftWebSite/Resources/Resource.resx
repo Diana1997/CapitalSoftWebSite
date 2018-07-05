@@ -126,20 +126,32 @@
   <data name="Contact_Us" xml:space="preserve">
     <value>Contact us</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="Name_Required" xml:space="preserve">
-    <value>Name is required 212125</value>
+    <value>Name is required </value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Please enter your name</value>
   </data>
   <data name="Portfolio" xml:space="preserve">
     <value>Portfolio</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Services</value>

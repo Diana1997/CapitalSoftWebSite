@@ -6,9 +6,9 @@
 }
 <section id="portfolio">
     <div>
-        <h2>Portfolio</h2>
         @if (Model.Projects != null)
         {
+            <h2>@Resources.Resource.Portfolio</h2>
             foreach (var item in Model.Projects)
             {
                 <p>@item.Name</p>
@@ -22,22 +22,20 @@
                 <ul>
                     @if (Model.TeamMembers != null)
                     {
-                    foreach (var elem in item.Technologies)
-                    {
-                        <li>@elem.Name</li>
-                    }
+                        foreach (var elem in item.Technologies)
+                        {
+                            <li>@elem.Name</li>
+                        }
                     }
                 </ul>
             }
         }
-
-
     </div>
 </section>
 <section id="team">
-    <h2>Team</h2>
     @if (Model.TeamMembers != null)
     {
+        <h2>@Resources.Resource.Team</h2>
         foreach (var item in Model.TeamMembers)
         {
             <p>@item.Firstname</p>
@@ -46,50 +44,49 @@
             if (item.Image != null)
             {
                 <div>
-                    <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300"  />
+                    <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
                 </div>
             }
             <hr />
         }
     }
-
 </section>
 
 <section id="contact">
     <h3>@Resources.Resource.Contact_Us</h3>
-    @using (Html.BeginForm(@*"Send", "Home"*@))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Name, new { htmlAttributes = new { placeholder = "Name" } })
+                    @Html.EditorFor(m => m.Contact.Name, new { htmlAttributes = new { placeholder = Resources.Resource.Name } })
                     @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Phone, new { htmlAttributes = new { placeholder = "Phone " } })
+                    @Html.EditorFor(m => m.Contact.Phone, new { htmlAttributes = new { placeholder = Resources.Resource.Phone } })
                     @Html.ValidationMessageFor(model => model.Contact.Phone, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Email, new { htmlAttributes = new { placeholder = "Email" } })
+                    @Html.EditorFor(m => m.Contact.Email, new { htmlAttributes = new { placeholder = Resources.Resource.Email } })
                     @Html.ValidationMessageFor(model => model.Contact.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.TextAreaFor(m => m.Contact.Message, new { placeholder = "Message" } )
+                    @Html.TextAreaFor(m => m.Contact.Message, new { placeholder = Resources.Resource.Message })
                     @Html.ValidationMessageFor(model => model.Contact.Message, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input value="Send" type="submit" class="btn-success" />
+                    <input value="@Resources.Resource.Send" type="submit" class="btn-success" />
                 </div>
             </div>
         </div>
