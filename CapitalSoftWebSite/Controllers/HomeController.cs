@@ -1,5 +1,4 @@
-﻿using CapitalSoftWebSite.Filters;
-using CapitalSoftWebSite.Helpers;
+﻿using CapitalSoftWebSite.Helpers;
 using CapitalSoftWebSite.Models;
 using CapitalSoftWebSite.ViewModel;
 using System;
@@ -20,8 +19,8 @@ namespace CapitalSoftWebSite.Controllers
         public ActionResult Index()
         {
             var model = new HomePageModel();
-            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
+            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
             return View(model);
         }
 
@@ -34,55 +33,10 @@ namespace CapitalSoftWebSite.Controllers
                 new DbAdaptor().CreateContact(contact);
             }
             var model = new HomePageModel();
-            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
+            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
+            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
             return View(model);
         }
-
-        //[Culture]
-        //public ActionResult ChangeCulture(string lang)
-        //{
-        //    ChangeLang(lang);
-        //    return RedirectToAction("Index");
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[Culture]
-        //public ActionResult Send(Contact contact)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        new DbAdaptor().CreateContact(contact);
-        //        return RedirectToAction("index");
-        //    }
-
-        //    var model = new HomePageModel();
-        //    model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
-        //    model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == CultureAttribute.cultureName).ToList();
-        //    model.Contact = contact;
-        //    return View("~/Views/Home/Index.cshtml", model);
-        //}
-
-        //private void ChangeLang(string lang)
-        //{
-        //    List<string> cultures = new List<string>() { "ru", "en", "am" };
-        //    if (!cultures.Contains(lang))
-        //    {
-        //        lang = "en";
-        //    }
-        //    HttpCookie cookie = Request.Cookies["lang"];
-        //    if (cookie != null)
-        //        cookie.Value = lang;
-        //    else
-        //    {
-
-        //        cookie = new HttpCookie("lang");
-        //        cookie.HttpOnly = false;
-        //        cookie.Value = lang;
-        //        cookie.Expires = DateTime.Now.AddYears(1);
-        //    }
-        //    Response.Cookies.Add(cookie);
-        //}
 
         public FileContentResult GetImage(int imageId)
         {
