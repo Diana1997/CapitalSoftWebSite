@@ -26,7 +26,6 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -224,10 +223,6 @@
     <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Contacts\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Contacts\Details.cshtml" />
-    <None Include="Dockerfile" />
-    <None Include=".dockerignore">
-      <DependentUpon>Dockerfile</DependentUpon>
-    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-3.0.3.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
