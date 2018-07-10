@@ -97,11 +97,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is required field.
+        /// </summary>
+        public static string Email_required {
+            get {
+                return ResourceManager.GetString("Email_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email.
+        /// </summary>
+        public static string Invalid_email {
+            get {
+                return ResourceManager.GetString("Invalid_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid name.
+        /// </summary>
+        public static string Invalid_name {
+            get {
+                return ResourceManager.GetString("Invalid_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid phone number.
+        /// </summary>
+        public static string Invalid_phone_number {
+            get {
+                return ResourceManager.GetString("Invalid_phone_number", resourceCulture);
             }
         }
         
@@ -115,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message is required field.
+        /// </summary>
+        public static string Message_required {
+            get {
+                return ResourceManager.GetString("Message_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
@@ -124,7 +169,16 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name is required .
+        ///   Looks up a localized string similar to Must be less than 40 characters.
+        /// </summary>
+        public static string Name_Email_Size {
+            get {
+                return ResourceManager.GetString("Name_Email_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is required  field.
         /// </summary>
         public static string Name_Required {
             get {
@@ -138,6 +192,15 @@ namespace Resources {
         public static string Phone {
             get {
                 return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must be less than 25 characters.
+        /// </summary>
+        public static string Phone_Size {
+            get {
+                return ResourceManager.GetString("Phone_Size", resourceCulture);
             }
         }
         

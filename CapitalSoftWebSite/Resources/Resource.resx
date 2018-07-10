@@ -129,20 +129,41 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Email_required" xml:space="preserve">
+    <value>Email is required field</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Invalid_email" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
+  <data name="Invalid_name" xml:space="preserve">
+    <value>Invalid name</value>
+  </data>
+  <data name="Invalid_phone_number" xml:space="preserve">
+    <value>Invalid phone number</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="Message_required" xml:space="preserve">
+    <value>Message is required field</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Name_Email_Size" xml:space="preserve">
+    <value>Must be less than 40 characters</value>
+  </data>
   <data name="Name_Required" xml:space="preserve">
-    <value>Name is required </value>
+    <value>Name is required  field</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
+  </data>
+  <data name="Phone_Size" xml:space="preserve">
+    <value>Must be less than 25 characters</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Please enter your name</value>

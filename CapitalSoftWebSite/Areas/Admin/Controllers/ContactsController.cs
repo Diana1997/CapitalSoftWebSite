@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ContactsController : Controller
     {
         public ActionResult Index()

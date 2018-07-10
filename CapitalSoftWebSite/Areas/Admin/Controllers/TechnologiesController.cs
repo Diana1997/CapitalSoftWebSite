@@ -10,6 +10,7 @@ using CapitalSoftWebSite.Models;
 
 namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
+    [Authorize]
     public class TechnologiesController : Controller
     {
         public ActionResult Index()

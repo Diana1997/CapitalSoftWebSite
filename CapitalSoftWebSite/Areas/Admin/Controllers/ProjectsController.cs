@@ -11,6 +11,7 @@ using CapitalSoftWebSite.Models;
 
 namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
 

@@ -129,20 +129,41 @@
   <data name="Email" xml:space="preserve">
     <value>Эл. адрес</value>
   </data>
+  <data name="Email_required" xml:space="preserve">
+    <value>Требуется  ввести поле электронная почта</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
+  </data>
+  <data name="Invalid_email" xml:space="preserve">
+    <value>Неверный адрес электронной почты</value>
+  </data>
+  <data name="Invalid_name" xml:space="preserve">
+    <value>Неверное имя</value>
+  </data>
+  <data name="Invalid_phone_number" xml:space="preserve">
+    <value>Неправильный номер телефона</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Сообщение</value>
   </data>
+  <data name="Message_required" xml:space="preserve">
+    <value>Требуется ввести поле сообщение</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Имя </value>
   </data>
+  <data name="Name_Email_Size" xml:space="preserve">
+    <value>Должно быть менее 40 символов</value>
+  </data>
   <data name="Name_Required" xml:space="preserve">
-    <value>Требуется имя</value>
+    <value>Требуется  ввести поле имя</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Телефон</value>
+  </data>
+  <data name="Phone_Size" xml:space="preserve">
+    <value>Должно быть менее 25 символов</value>
   </data>
   <data name="Please_enter_your_name" xml:space="preserve">
     <value>Пожалуйста, введите Ваше имя</value>
