@@ -18,24 +18,39 @@ namespace CapitalSoftWebSite.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = new HomePageModel();
-            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
-            return View(model);
+            try
+            {
+                var model = new HomePageModel();
+                model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
+                model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Contact contact, string lang)
         {
-            if (ModelState.IsValid)
+            try
             {
-                new DbAdaptor().CreateContact(contact);
+                if (ModelState.IsValid)
+                {
+                    new DbAdaptor().CreateContact(contact);
+                }
+                var model = new HomePageModel();
+                model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
+                model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
+                return View(model);
             }
-            var model = new HomePageModel();
-            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
-            return View(model);
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
         }
 
         public FileContentResult GetImage(int imageId)
@@ -50,7 +65,6 @@ namespace CapitalSoftWebSite.Controllers
         public ActionResult SetCulture(string lang)
         {
             lang = CultureHelper.GetImplementedCulture(lang);
-
             HttpCookie cookie = Request.Cookies["_culture"];
             if (cookie != null)
                 cookie.Value = lang;   
@@ -62,7 +76,6 @@ namespace CapitalSoftWebSite.Controllers
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-      
             return RedirectToAction("Index");
         }
     }

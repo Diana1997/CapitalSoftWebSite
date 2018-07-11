@@ -10,7 +10,7 @@ using CapitalSoftWebSite.Models;
 
 namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class TeamMembersController : Controller
     {
         private static int? imageId { set; get; }

@@ -31,12 +31,12 @@ namespace CapitalSoftWebSite.Controllers
                 }
                 else
                 {
-                    if (count > 2)
-                    {
-                        //ToDo change redirect
-                        count = 0;
-                        return RedirectToAction("Index", "Home");
-                    }
+                    //if (count > 2)
+                    //{
+                    //    //ToDo change redirect
+                    //    count = 0;
+                    //    return RedirectToAction("Index", "Home");
+                    //}
                     ViewBag.ErrorMessage = "Invalid username or password";
                     return View(loginModel);
                 }
