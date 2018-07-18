@@ -13,6 +13,10 @@ namespace CapitalSoftWebSite
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.RouteExistingFiles = false;
+            //routes.IgnoreRoute("Content/{all}");
+            //routes.Ignore("Scripts/{all}");
+            
             routes.MapRoute(
                 name: "Default",
                 url: "{lang}/{controller}/{action}/{id}",

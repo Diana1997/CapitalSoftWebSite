@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\account-style.css" />
-    <Content Include="Content\adminStyle.css" />
+    <Content Include="Content\admin\admin-style.css" />
     <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\bootstrap.3.3.0.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -232,6 +232,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

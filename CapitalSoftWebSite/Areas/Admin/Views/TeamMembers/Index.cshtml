@@ -5,46 +5,64 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Firstname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lastname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Position)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lang)
-        </th>
-        <th></th>
-    </tr>
+<h2>Team Members</h2>
+<button class="btn btn-success btn-m-top" onclick="location.href='@Url.Action("Create", "TeamMembers")'">
+    Create New
+    @*@Html.ActionLink("Create New", "Create")*@
+</button>
+
+<table class="table table-hover tbl-margin">
+    <thead class="thead-style">
+        <tr class="info">
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lang)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Firstname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lang)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.TeamMemberID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.TeamMemberID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.TeamMemberID })
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lang)
+            </td>
+            <td>
+                <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Edit", "TeamMembers", new { id = item.TeamMemberID })'">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TeamMemberID })
+                |
+                <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Details", "TeamMembers", new { id = item.TeamMemberID })'">
+                    <span class="glyphicon glyphicon-list" data-placement="top" data-toggle="tooltip"></span>
+                </button>
+                @Html.ActionLink("Details", "Details", new { id = item.TeamMemberID })
+                |
+                <button class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "TeamMembers", new { id = item.TeamMemberID })'">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                @Html.ActionLink("Delete", "Delete", new { id = item.TeamMemberID })
+            </td>
+        </tr>
     }
 </table>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

@@ -8,7 +8,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             return View();
