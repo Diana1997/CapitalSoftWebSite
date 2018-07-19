@@ -14,10 +14,8 @@
 }
 
 #sidebar-wrapper {
-    /*margin-left: -150px;*/
     margin-left: -225px;
     left: 70px;
-    /*width: 150px;*/
     width: 225px;
     background: #09192A;
     position: fixed;
@@ -29,7 +27,6 @@
 .sidebar-nav {
     display: block;
     float: left;
-    /*width: 150px;*/
     width: 225px;
     list-style: none;
     margin: 0;
@@ -44,13 +41,11 @@
 }
 
 #wrapper.active {
-    /*padding-left: 150px;*/
     padding-left: 225px;
 }
 
     #wrapper.active #sidebar-wrapper {
         left: 225px;
-        /*left: 150px;*/
     }
 
 #page-content-wrapper {
@@ -58,7 +53,6 @@
 }
 
 #sidebar_menu li a, .sidebar-nav li a {
-    color: #999;
     display: block;
     float: left;
     text-decoration: none;
@@ -85,7 +79,6 @@
 }
 
     .sidebar-nav li a {
-        /*color: #999999;*/
         color: white;
         display: block;
         text-decoration: none;
@@ -109,7 +102,7 @@
 }
 
     .sidebar-nav > .sidebar-brand a {
-        color: #999999;
+        font-weight: bold;
     }
 
         .sidebar-nav > .sidebar-brand a:hover {
@@ -125,7 +118,7 @@
 
 .sub_icon {
     float: right;
-    padding-right: 65px;
+    padding-right: 60px;
     padding-top: 10px;
 }
 
@@ -152,15 +145,37 @@
     }
 
     #wrapper.active {
-        /*padding-left: 150px;*/
         padding-left: 225px;
     }
 
         #wrapper.active #sidebar-wrapper {
-            /*left: 150px;*/
             left: 225px;
-            /*width: 150px;*/
             width: 225px;
             transition: all .4s ease 0s;
         }
 }
+
+
+.col-lg-12 div {
+    margin-left: -30px;
+    margin-right: -23px;
+}
+
+
+
+.well-header {
+    color: white;
+    min-height: 20px;
+    padding: 17px;
+    margin-bottom: 20px;
+    background-color: #09192A;
+    border: 1px solid #09192A;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    border-left: 1px solid #7c7c7c;
+}
+
+    .well-header a {
+        color: white;
+        font-size: 16px;
+        padding-right: 250px;
+    }

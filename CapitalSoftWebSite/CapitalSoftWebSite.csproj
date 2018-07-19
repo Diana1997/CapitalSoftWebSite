@@ -193,10 +193,13 @@
   <ItemGroup>
     <Content Include="Content\account-style.css" />
     <Content Include="Content\admin\admin-style.css" />
+    <Content Include="Content\admin\pages.css" />
     <Content Include="Content\bootstrap-multiselect.css" />
+    <Content Include="Content\bootstrap.3.0.3.min.css" />
     <Content Include="Content\bootstrap.3.3.0.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap․3․3․7.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -5,16 +5,20 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+<h2>Technology</h2>
+<button class="btn btn-success btn-m-top btn-create" onclick="location.href='@Url.Action("Create", "Technologies")'">
+    Create New
+</button>
+
+<table class="table table-hover tbl-margin">
+    <thead class="thead-style">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
@@ -23,8 +27,19 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TechnologyID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TechnologyID }) |
+                <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Edit", "Technologies", new { id = item.TechnologyID })'">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TechnologyID })
+                <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Details", "Technologies", new { id = item.TechnologyID })'">
+                    <span class="glyphicon glyphicon-list" data-placement="top" data-toggle="tooltip"></span>
+                </button>
+                |
+                @Html.ActionLink("Details", "Details", new { id = item.TechnologyID })
+                |
+                <button class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "Technologies", new { id = item.TechnologyID })'">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
                 @Html.ActionLink("Delete", "Delete", new { id = item.TechnologyID })
             </td>
         </tr>
@@ -32,3 +47,6 @@
 
 </table>
 
+
+<link rel="stylesheet" href="~/Content/bootstrap․3․3․7.min.css">
+<link rel="stylesheet" href="~/Content/admin/pages.css" />

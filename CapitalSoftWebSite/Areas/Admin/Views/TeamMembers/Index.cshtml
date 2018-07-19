@@ -5,15 +5,14 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-<h2>Team Members</h2>
-<button class="btn btn-success btn-m-top" onclick="location.href='@Url.Action("Create", "TeamMembers")'">
+<h2 >Team Members</h2>
+<button class="btn btn-success btn-m-top btn-create" onclick="location.href='@Url.Action("Create", "TeamMembers")'">
     Create New
-    @*@Html.ActionLink("Create New", "Create")*@
 </button>
 
 <table class="table table-hover tbl-margin">
     <thead class="thead-style">
-        <tr class="info">
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Firstname)
             </th>
@@ -65,4 +64,5 @@
     }
 </table>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Content/bootstrap․3․3․7.min.css">
+<link rel="stylesheet" href="~/Content/admin/pages.css"/>

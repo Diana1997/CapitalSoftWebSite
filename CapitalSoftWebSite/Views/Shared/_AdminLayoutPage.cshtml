@@ -10,65 +10,97 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/Content/admin/admin-style.css" />
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="~/Content/bootstrap.3.0.3.min.css" />
     <script src="~/Scripts/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-  
-        <div id="wrapper" class="active">
 
-            <div id="sidebar-wrapper">
-                <ul id="sidebar_menu" class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a id="menu-toggle" href="#">
-                            Admin
-                            <span id="main_icon" class="glyphicon glyphicon-align-justify"></span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="sidebar-nav" id="sidebar">
-                    <li>@Html.ActionLink("Team member", "Index", "TeamMembers")<span class="sub_icon glyphicon glyphicon-link glyphicons "></span></li>
-                    <li> @Html.ActionLink("Technology", "Index", "Technologies")<span class="sub_icon glyphicon glyphicon-link"></span></li>
-                    <li> @Html.ActionLink("Project", "Index", "Projects")<span class="sub_icon glyphicon glyphicon-link"></span></li>
-                    <li> @Html.ActionLink("Contact", "Index", "Contacts")<span class="sub_icon glyphicon glyphicon-link"></span></li>
-                    <li>
-                        @Html.ActionLink("222", "Index", "Contacts")<span class="sub_icon glyphicon glyphicon-th-large">
+    <div id="wrapper" class="active">
 
-                        </span>
-                    </li>
-                </ul>
-            </div>
+        <div id="sidebar-wrapper">
+            <ul id="sidebar_menu" class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a id="menu-toggle">
+                        Admin
+                        <span id="main_icon" class="glyphicon glyphicon-align-justify"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="sidebar-nav" id="sidebar">
+                <li>
+                    <a href="@Url.Action("Index", "TeamMembers")">
+                        Team member
+                        <span class="sub_icon glyphicon glyphicon glyphicon-user"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Technologies")">
+                        Technology
+                        <span class="sub_icon glyphicon glyphicon-link"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Projects")">
+                        Project
+                        <span class="sub_icon glyphicon glyphicon-link"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Contacts")">
+                        Contact
+                        <span class="sub_icon glyphicon glyphicon-link"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <div id="page-content-wrapper">
-                @*<div class="page-content inset">*@
-                            <p class="well lead">Capital Soft</p>
-                @*</div>*@
-                <div class="container">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="col-lg-12">
+                    <div>
+                        <p class="well-header lead">
+                            Capital Soft
+                            <a href="@Url.Action(actionName: "LogOff", controllerName: "Account", routeValues: new { area = ""})">
+                                Log out
+                                <span class="glyphicon glyphicon-log-out"></span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div>
                     @RenderBody()
                 </div>
             </div>
-
         </div>
+    </div>
 
-    
 
-    <style>
-        .page-content inset p {
-            background-color: #09192A;
-            /*min-height: 50px;*/
-            transition: background .5s;
-            border-top: 1px solid #09192A;
-            border-bottom: 1px solid #09192A;
-            color: white;
-            padding: 17px;
-        }
-    </style>
     <script>
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("active");
         });
     </script>
+
+
+
+   <style>
+       .well-header {
+           color: white;
+           min-height: 20px;
+           padding: 17px;
+           margin-bottom: 20px;
+           background-color: #09192A;
+           border: 1px solid #09192A;
+           box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+           border-left: 1px solid #7c7c7c;
+       }
+
+           .well-header a {
+               color: white;
+               font-size: 16px;
+               padding-right: 250px;
+           }
+   </style>
 </body>
 </html>
