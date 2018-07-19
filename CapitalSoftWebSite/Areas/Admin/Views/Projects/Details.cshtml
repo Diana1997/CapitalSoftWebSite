@@ -5,54 +5,56 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-    <div>
-        <h4>Project</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+<div>
+    <h2>Project</h2>
+    <p>Details</p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Lang)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lang)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Lang)
-            </dd>
-            <dt>Images</dt>
-            <dd>
-             @foreach (var elem in Model.Images)
-             {
+        <dd>
+            @Html.DisplayFor(model => model.Lang)
+        </dd>
+        <dt>Techologies</dt>
+        <dd>
+            <ul>
+                @foreach (var elem in Model.Technologies)
+                {
+                    <li>@elem.Name</li>
+                }
+            </ul>
+        </dd>
+        <dt>Images</dt>
+        <dd>
+            @foreach (var elem in Model.Images)
+            {
                 <div>
                     <img src="@Url.Action("GetImage", "Projects", new { elem.ImageID })" width="300" height="300" />
                 </div>
             }
-            </dd>
-            <dt>Techologies</dt>
-            <dd>
-                <ul>
-                    @foreach (var elem in Model.Technologies)
-                    {
-                        <li>@elem.Name</li>
-                    }
-                </ul>
-            </dd>
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

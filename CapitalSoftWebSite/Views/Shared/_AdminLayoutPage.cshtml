@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="~/Content/admin/admin-style.css" />
     <link rel="stylesheet" href="~/Content/bootstrap.3.0.3.min.css" />
     <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/admin/pages.css" />
 </head>
 <body>
 
@@ -67,7 +69,7 @@
                         </p>
                     </div>
                 </div>
-                <div>
+                <div class="main-content">
                     @RenderBody()
                 </div>
             </div>
@@ -101,6 +103,10 @@
                font-size: 16px;
                padding-right: 250px;
            }
+
+       .main-content {
+           padding: 20px;
+       }
    </style>
 </body>
 </html>

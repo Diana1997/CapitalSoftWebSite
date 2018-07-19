@@ -17,7 +17,8 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Project</h4>
+    <h2>Project</h2>
+    <p>Edit</p>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ProjectID)
@@ -44,24 +45,6 @@
             @Html.ValidationMessageFor(model => model.Lang, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    <div class="form-group">
-        @foreach (var elem in Model.Images)
-        {
-            <div>
-                <img src="@Url.Action("GetImage", "Projects", new { elem.ImageID })" width="300" height="300" />
-            </div>
-            <button name="imgDeleteID" value="@elem.ImageID" formaction=@Url.Action("DeleteImage")>
-                <span class="glyphicon glyphicon-remove"></span>
-            </button>
-        }
-    </div>
-
-    <div class="form-group">
-        <input type="file" name="files" multiple />
-    </div>
-
-
     <div>
         <ul>
             @foreach (var elem in Model.Technologies)
@@ -85,6 +68,24 @@
             </div>
         </div>
     }
+
+    <div class="form-group">
+        @foreach (var elem in Model.Images)
+        {
+            <div>
+                <img src="@Url.Action("GetImage", "Projects", new { elem.ImageID })" width="300" height="300" />
+            </div>
+            <button name="imgDeleteID" value="@elem.ImageID" formaction=@Url.Action("DeleteImage")>
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        }
+    </div>
+
+    <div class="form-group">
+        <input type="file" name="files" multiple />
+    </div>
+
+
 
 
     <div class="form-group">
