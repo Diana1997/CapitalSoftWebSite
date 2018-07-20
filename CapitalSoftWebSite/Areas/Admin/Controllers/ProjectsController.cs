@@ -101,13 +101,13 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                     new SelectListItem {Text = "am", Value = "am"}, },
             "Value", "Text");
 
-            var list1 = new DbAdaptor().GetTechnologies()?.ToList();
-            var list2 = project.Technologies?.ToList();
+            var all = new DbAdaptor().GetTechnologies()?.ToList();
+            var selected = project.Technologies?.ToList();
 
-            if (list2 != null)
+            if (selected != null)
             {
-                var list3 = list1.Where(x => !list2.Contains(x)).ToList();
-                ViewBag.TechnologyID = new MultiSelectList(list3, "TechnologyID", "Name");
+                var notSelected = all.Where(x => !selected.Contains(x)).ToList();
+                ViewBag.TechnologyID =   notSelected.Count > 0 ?  new MultiSelectList(notSelected, "TechnologyID", "Name") : null;
             }
             return View(project);
         }

@@ -44,12 +44,12 @@
         </dd>
         <dt>Images</dt>
         <dd>
-            @foreach (var elem in Model.Images)
-            {
-                <div>
-                    <img src="@Url.Action("GetImage", "Projects", new { elem.ImageID })" width="300" height="300" />
-                </div>
-            }
+            <div class="col-md-10">
+                @foreach (var elem in Model.Images)
+                {
+                    <img src="@Url.Action("GetImage", "Projects", new { elem.ImageID })" class="img-thumbnail img-size"  />
+                }
+            </div>
         </dd>
 
     </dl>

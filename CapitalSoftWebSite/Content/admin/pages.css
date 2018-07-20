@@ -12,3 +12,21 @@ thead tr{
     color: white;
     background-color: #34407cbf;
 }
+
+.img-size {
+    width: 300px;
+    height: 300px;
+}
+
+.li-tech {
+    margin-bottom: 7px;
+}
+
+.list-group-item-text  button {
+    background-color: #ffffff00;
+}
+
+.btn-team-member-delete {
+    margin-left: -45px;
+    margin-top: -267px;
+}
