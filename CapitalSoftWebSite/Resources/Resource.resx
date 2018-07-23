@@ -150,6 +150,9 @@
   <data name="Message_required" xml:space="preserve">
     <value>Message is required field</value>
   </data>
+  <data name="Message_sent" xml:space="preserve">
+    <value>Your message has been sent</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>

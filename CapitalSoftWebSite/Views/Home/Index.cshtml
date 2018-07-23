@@ -1,6 +1,6 @@
 ﻿@model CapitalSoftWebSite.ViewModel.HomePageModel
 @{
-    /**/
+    
 
     ViewBag.Title = "Home Page";
 }
@@ -54,6 +54,10 @@
 
 <section id="contact">
     <h3>@Resources.Resource.Contact_Us</h3>
+    @if (ViewBag.SendMessage != null)
+    {
+        <p>@ViewBag.SendMessage</p>
+    }
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()

@@ -18,18 +18,18 @@ namespace CapitalSoftWebSite.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            var model = new HomePageModel();
             try
             {
-                var model = new HomePageModel();
                 model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
                 model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
-                return View(model);
+                ViewBag.SendMessage = "";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound();
+                Response.StatusCode = 500;
             }
-
+            return View(model);
         }
 
         [HttpPost]
@@ -38,11 +38,15 @@ namespace CapitalSoftWebSite.Controllers
         {
             try
             {
+                var model = new HomePageModel();
                 if (ModelState.IsValid)
                 {
-                    new DbAdaptor().CreateContact(contact);
+                    if(new DbAdaptor().CreateContact(contact) > 0)
+                    {
+                        ViewBag.SendMessage = Resources.Resource.Message_sent; 
+                        ModelState.Clear();
+                    }
                 }
-                var model = new HomePageModel();
                 model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
                 model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
                 return View(model);
