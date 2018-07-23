@@ -147,6 +147,9 @@
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="Message_not_sent" xml:space="preserve">
+    <value>Your message has not been sent.</value>
+  </data>
   <data name="Message_required" xml:space="preserve">
     <value>Message is required field</value>
   </data>

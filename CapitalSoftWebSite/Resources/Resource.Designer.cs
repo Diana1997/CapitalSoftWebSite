@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your message has not been sent..
+        /// </summary>
+        public static string Message_not_sent {
+            get {
+                return ResourceManager.GetString("Message_not_sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message is required field.
         /// </summary>
         public static string Message_required {

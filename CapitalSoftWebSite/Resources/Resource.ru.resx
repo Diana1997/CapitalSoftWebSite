@@ -147,6 +147,9 @@
   <data name="Message" xml:space="preserve">
     <value>Сообщение</value>
   </data>
+  <data name="Message_not_sent" xml:space="preserve">
+    <value>Ваше сообщение не отправлено</value>
+  </data>
   <data name="Message_required" xml:space="preserve">
     <value>Требуется ввести поле сообщение</value>
   </data>

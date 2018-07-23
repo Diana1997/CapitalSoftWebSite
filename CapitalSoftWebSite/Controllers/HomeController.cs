@@ -36,9 +36,9 @@ namespace CapitalSoftWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(Contact contact, string lang)
         {
+            var model = new HomePageModel();
             try
             {
-                var model = new HomePageModel();
                 if (ModelState.IsValid)
                 {
                     if(new DbAdaptor().CreateContact(contact) > 0)
@@ -49,12 +49,12 @@ namespace CapitalSoftWebSite.Controllers
                 }
                 model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
                 model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
-                return View(model);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound();
+                ViewBag.SendMessage = Resources.Resource.Message_not_sent;
             }
+            return View(model);
         }
 
         public FileContentResult GetImage(int imageId)
