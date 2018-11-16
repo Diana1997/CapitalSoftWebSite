@@ -1,110 +1,273 @@
 ﻿@model CapitalSoftWebSite.ViewModel.HomePageModel
 @{
-    
+
 
     ViewBag.Title = "Home Page";
 }
-<section id="portfolio">
-    <div>
-        @if (Model.Projects != null)
-        {
-            <h2>@Resources.Resource.Portfolio</h2>
-            foreach (var item in Model.Projects)
-            {
-                <p>@item.Name</p>
-                <p>@item.Description</p>
-                foreach (var elem in item.Images)
-                {
-                    <div>
-                        <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
-                    </div>
-                }
-                <ul>
-                    @if (Model.TeamMembers != null)
-                    {
-                        foreach (var elem in item.Technologies)
-                        {
-                            <li>@elem.Name</li>
-                        }
-                    }
-                </ul>
-            }
-        }
+<header>
+
+    <div class="container">
+        <div class="capital">
+            <h1>Capital Soft</h1>
+            <p>Software tailored to your needs</p>
+        </div>
     </div>
-</section>
-<section id="team">
-    @if (Model.TeamMembers != null)
-    {
-        <h2>@Resources.Resource.Team</h2>
-        foreach (var item in Model.TeamMembers)
-        {
-            <p>@item.Firstname</p>
-            <span>@item.Lastname</span>
-            <p>@item.Position</p>
-            if (item.Image != null)
-            {
-                <div>
-                    <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
-                </div>
-            }
-            <hr />
-        }
-    }
-</section>
+    <div class="black_section1"></div>
+</header>
+<div class="white-fon">
+    <div class="about-us container" id="about-us">
+        <div class="p-margin col-sm-12 col-md-12">
+            <p>
+                Мы открылись в сентябре 2017 года и уже добились немалых успехов. Завершили ряд проектов, как настольных приложений, так и веб-проектов. Мы занимаемся аутсорсингом, помогая воплощать идеи в жизнь, и наши клиенты могут видеть и наслаждаться использованием продукта. Кроме того,  мы любим выпускать и реализовывать свои собственные идеи и видения. Для всего вышеперечисленного нам нужна команда хороших специалистов, и у нас это есть. Вы можете положиться на них.
+                <br />
+                <br />
+            </p>
+        </div>
+    </div>
+</div>
+<div class="black_section2 container"></div>
 
-<section id="contact">
-    <h3>@Resources.Resource.Contact_Us</h3>
-    @if (ViewBag.SendMessage != null)
-    {
-        <p>@ViewBag.SendMessage</p>
-    }
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true)
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Name, new { htmlAttributes = new { placeholder = Resources.Resource.Name } })
-                    @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
-                </div>
+<div class="a1-fon-1">
+    <div class="container work-plan" id="work-plan">
+        <div class="inscription-plan-work">
+            <h1>СЕРВИСЫ</h1>
+            <div class="work-plan-1 web col-sm-12 col-md-4">
+                <img src="~/Content/Images/web.png" alt="web">
+                <h3>WEB</h3>
+                <p>Мы помогаем вашему бизнесу расти, и это не просто слова. Если вам нужен веб-сайт для вашей компании, чтобы люди могли узнать о вашей организации и о ваших услугах больше, мы можем организовать все это. Наша компания обеспечит хороший дизайн, творческие идеи и очень четкий интерфейс.</p>
             </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Phone, new { htmlAttributes = new { placeholder = Resources.Resource.Phone} })
-                    @Html.ValidationMessageFor(model => model.Contact.Phone, "", new { @class = "text-danger" })
-                </div>
+            <div class="work-plan-1 training col-sm-12  col-md-4">
+                <img src="~/Content/Images/training.png" alt="web">
+                <h3>Training</h3>
+                <p>Мы действительно хотим, чтобы все те, кто интересуется ИТ-отраслью, могли стать частью этой сферы. Для этого очень важно организовать регулярные тренинги, чтобы желающие могли определить свою профессию и увидеть все изнутри. Все те, кто обладает большим потенциалом и постоянно стремятся развиваться в своем направлении, смогут найти свое место в нашей команде.</p>
             </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.Contact.Email, new { htmlAttributes = new { placeholder = Resources.Resource.Email } })
-                    @Html.ValidationMessageFor(model => model.Contact.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.TextAreaFor(m => m.Contact.Message, new { placeholder = Resources.Resource.Message })
-                    @Html.ValidationMessageFor(model => model.Contact.Message, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input value="@Resources.Resource.Send" type="submit" class="btn-success" />
-                </div>
+            <div class="work-plan-1 col-sm-12  col-md-4">
+                <img src="~/Content/Images/app.png" alt="web">
+                <h3>Software solutions</h3>
+                <p>Любое приложение, которое вам нужно для вашего офиса, для вашего бизнеса, которое  ускоряет процесс работы, контролирует все и не тратит время впустую, мы поможем с этим. После того, как вы сообщите нам, что вам нужно, мы сразу начнем работу над вашим проектом, и вскоре вы увидите на своем компьютере самое то приложение, которое решает многие проблемы и станет неотъемлемой частью вашего бизнеса. Вы получаете то, что вам нужно: крутой дизайн и все необходимые функции.</p>
             </div>
         </div>
-    }
-
-</section>
-
-<section id="stagesOfWork">
-    <div>
-        <i class="fa fa-comments" aria-hidden="true"></i>
     </div>
-</section>
+</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+<div class="work" id="portfolio">
+    @{
+        if (Model.Projects != null)
+        {
+            int i = 0;
+            foreach (var elem in Model.Projects)
+            {
+                if (i % 2 == 0)
+                {
+                    <div class="container wight" id="#work">
+                        <div class="desktop col-md-6 col-sm-6 pull-right">
+                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })"  width="100%" alt="">
+                        </div>
+
+                        <div class="work-info col-md-6 col-sm-6">
+                            <h1>@elem.Name</h1>
+                            <p>@elem.Description</p>
+                            <h1>@Resources.Resource.Technologies</h1>
+                            <ul>
+                                @if (elem.Technologies != null)
+                                {
+                                    foreach (var t in elem.Technologies)
+                                    {
+                                        <li>@t.Name</li>
+                                    }
+                                }
+                            </ul>
+                            <div class="line"></div>
+                            <a href="#win1" class="bottom">подробнее</a>
+                            <a href="#win1"></a>
+                            <a href="#x" class="overlay" id="win1"></a>
+                            @*<div class="popup">
+                                <a class="close" title="Закрыть" href="#close"></a>
+                                <div class="bhover-photo">
+                                    <div id="container">
+
+                                        <!------------------------------------- THE CONTENT ------------------------------------------------->
+                                        <div class="tra">
+                                            <div id="lofslidecontent45" class="lof-slidecontent">
+                                                <div class="preload"><div></div></div>
+                                                <!-- MAIN CONTENT -->
+                                                <ul class="lof-main-wapper">
+
+                                                    <img class="mySlides" src=".//images/222.jpg">
+                                                    <img class="mySlides" src=".//images/111.jpg">
+                                                    <img class="mySlides" src=".//images/333.jpg">
+                                                    <img class="mySlides" src=".//images/444.jpg">
+
+                                                </ul>
+                                                <!-- END MAIN CONTENT -->
+                                                <!-- NAVIGATOR -->
+                                                <div class="lof-navigator-wapper">
+
+
+                                                    <div class="w3-button lof-next w3-display-left" onclick="plusDivs(-1)" onclick="return false" class="lof-next">Next</div>
+
+                                                    <div class="w3-button lof-previous w3-display-right" onclick="plusDivs(+1)" onclick="return false" class="lof-previous">Previous</div>
+
+
+                                                    <!--                <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>-->
+
+                                                    <script>
+      var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+    showDivs(slideIndex += n);
 }
+
+function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length} ;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+}
+                                                    </script>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="hover-text">
+                                    <h>Disk defender</h>
+                                    <p>
+                                        Разработка landing page для мобильной игры. Создание трендового дизайна, верстка уникального шаблона, адаптация под мобильные устройства, програмирование, посадка на CMS Modx. SEO-оптимизация
+                                    </p>
+
+                                </div>
+                                <div class="clear"></div>
+                            </div>*@
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                }
+                ++i;
+            }
+        }
+    }
+</div>
+
+
+
+
+
+    <section id="portfolio">
+        <div>
+            @if (Model.Projects != null)
+            {
+                <h2>@Resources.Resource.Portfolio</h2>
+                foreach (var item in Model.Projects)
+                {
+                    <p>@item.Name</p>
+                    <p>@item.Description</p>
+                    foreach (var elem in item.Images)
+                    {
+                        <div>
+                            <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
+                        </div>
+                    }
+                    <ul>
+                        @if (Model.TeamMembers != null)
+                        {
+                            foreach (var elem in item.Technologies)
+                            {
+                                <li>@elem.Name</li>
+                            }
+                        }
+                    </ul>
+                }
+            }
+        </div>
+    </section>
+    <section id="team">
+        @if (Model.TeamMembers != null)
+        {
+            <h2>@Resources.Resource.Team</h2>
+            foreach (var item in Model.TeamMembers)
+            {
+                <p>@item.Firstname</p>
+                <span>@item.Lastname</span>
+                <p>@item.Position</p>
+                if (item.Image != null)
+                {
+                    <div>
+                        <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
+                    </div>
+                }
+                <hr />
+            }
+        }
+    </section>
+
+    <section id="contact">
+        <h3>@Resources.Resource.Contact_Us</h3>
+        @if (ViewBag.SendMessage != null)
+        {
+            <p>@ViewBag.SendMessage</p>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Contact.Name, new { htmlAttributes = new { placeholder = Resources.Resource.Name } })
+                        @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Contact.Phone, new { htmlAttributes = new { placeholder = Resources.Resource.Phone } })
+                        @Html.ValidationMessageFor(model => model.Contact.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Contact.Email, new { htmlAttributes = new { placeholder = Resources.Resource.Email } })
+                        @Html.ValidationMessageFor(model => model.Contact.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.Contact.Message, new { placeholder = Resources.Resource.Message })
+                        @Html.ValidationMessageFor(model => model.Contact.Message, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input value="@Resources.Resource.Send" type="submit" class="btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </section>
+
+    <section id="stagesOfWork">
+        <div>
+            <i class="fa fa-comments" aria-hidden="true"></i>
+        </div>
+    </section>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -6,51 +6,83 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+    <div class="navbar navbar-default navbar-fixed-top">
+
+        <div class="fon-top-menu">
+            <div class="logo col-md-2 pull-left ">
+                <a><img src="~/Content/Images/logo55.png" alt="Logo"></a>
+            </div>
+            <div class="navbar-header col-md-6">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            </div>
-            <nav>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink(Resources.Resource.Home, "", "")</li>
-                        <li>@Html.ActionLink(Resources.Resource.Services, "")</li>
+                <div class="navbar-collapse fff collapse">
+                    <ul class="nav navbar-nav navbnar-right">
+                        <li class="active">@Html.ActionLink(Resources.Resource.Home, "", "")</li>
+                        <li>@Html.ActionLink(Resources.Resource.Services, "Index", "Services")</li>
                         <li>@Html.ActionLink(Resources.Resource.Portfolio, "", "")</li>
-                        <li>@Html.ActionLink(Resources.Resource.About, "", "")</li>
-                        <li>@Html.ActionLink(Resources.Resource.Team, "", "")</li>
-                        @*  <li>@Html.ActionLink(Resources.Resource.Contact, "", "")</li>*@
-                        <li>
-                            <a href="#contact">@Resources.Resource.Contact</a>
-                        </li>
+                        <li>@Html.ActionLink(Resources.Resource.About, "Index", "ContactAs")</li>
+                        <li>@Html.ActionLink(Resources.Resource.Team, "Index", "Team")</li>
                     </ul>
-
-                    <a href="@Url.Action("SetCulture", "Home", new { lang = "en"})">eng</a> |
-                    <a href="@Url.Action("SetCulture", "Home", new { lang = "ru"})">rus</a> |
-                    <a href="@Url.Action("SetCulture", "Home", new { lang = "am"})">arm</a>
                 </div>
-            </nav>
+            </div>
+            <div class=" social pull-left col-md-2">
+
+                <ul>
+                    <a href="">
+                        <li class="line-social">
+                            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="line-social line-social-1 ">
+                            <i class="fa fa fa-twitter" aria-hidden="true"></i>
+                        </li>
+                    </a>
+
+                    <a href="">
+                        <li class="line-social line-social-1">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </li>
+                    </a>
+                </ul>
+
+
+            </div>
+            <div class="language col-md-2">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("SetCulture", "Home", new { lang = "en"})">eng</a> |
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SetCulture", "Home", new { lang = "ru"})">rus</a> |
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SetCulture", "Home", new { lang = "am"})">arm</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-
     </div>
-    <div class="container body-content">
+
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        </footer>*@
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Raleway|Roboto" rel="stylesheet">
 </body>
 </html>

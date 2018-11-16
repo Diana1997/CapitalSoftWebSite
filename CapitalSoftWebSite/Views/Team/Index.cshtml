@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CapitalSoftWebSite.Models.TeamMember>
+@{
+    ViewBag.Title = "Index";
+}
+ 
+<body class="body-about">
+    <div class="clear"></div>
+    <div class="container">
+        <h1>OUR TEAM</h1>
+        <div class="col-md-12 them">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-12	col-md-4	col-lg-4    col-sm-6">
+                    <div class="about-border programmer">
+                        <img src="@Url.Action("GetImage", "Home", new { item.ImageId })" width="250" height="250" alt="">
+                    </div>
+                    <div class="name-programmer">
+                        <p><span>@item.Position</span></p>
+                        <p>@item.Firstname @item.Lastname</p>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="footer">
+        <div class="bottom-fon col-md-12">
+            <div class="contact-left contact-fon col-md-12 col-sm-12 col-xs-12">
+                <div class="contact">
+                    <h3>Наши контакты</h3>
+
+                    <i class="fa fa-phone" aria-hidden="true"> +37497178384</i><br>
+                    <i class="fa fa-envelope" aria-hidden="true"> capitalsoft@gmail.com</i><br>
+                    <i class="fa fa-map-marker" aria-hidden="true"> Artsakh Stepanakert Street Martuni 20/1  <br /> Capital Soft office </i>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+

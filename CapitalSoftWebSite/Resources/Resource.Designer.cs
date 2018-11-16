@@ -266,5 +266,14 @@ namespace Resources {
                 return ResourceManager.GetString("Team", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technologies.
+        /// </summary>
+        public static string Technologies {
+            get {
+                return ResourceManager.GetString("Technologies", resourceCulture);
+            }
+        }
     }
 }

@@ -186,4 +186,7 @@
   <data name="Team" xml:space="preserve">
     <value>Թիմ</value>
   </data>
+  <data name="Technologies" xml:space="preserve">
+    <value>Տեխնոլոգիաներ</value>
+  </data>
 </root>

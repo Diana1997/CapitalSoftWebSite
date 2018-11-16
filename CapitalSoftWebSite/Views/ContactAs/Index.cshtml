@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+>
+<body class="contact-fon">
+    <div class="clear"></div>
+    <div class="contact-padding">
+        <div class="container connect-with-us" id="connect">
+            <div id="w" class="col-md-6 letter">
+                <h1>Написать письмо</h1>
+                <form id="contactform" name="contact" method="post" action="#">
+                    <p class="note"><span class="req"></span></p>
+                    <div class="row">
+                        <label for="name">Ваше Имя <span class="req"></span></label>
+                        <input type="text" name="name" id="name" class="txt" tabindex="1" placeholder="Стив Джобс" required>
+                    </div>
+
+                    <div class="row">
+                        <label for="email">E-mail Адрес <span class="req"></span></label>
+                        <input type="email" name="email" id="email" class="txt" tabindex="2" placeholder="address@mail.ru" required>
+                    </div>
+
+                    <div class="row">
+                        <label for="subject">Тема <span class="req"></span></label>
+                        <input type="text" name="subject" id="subject" class="txt" tabindex="3" placeholder="Тема письма" required>
+                    </div>
+
+                    <div class="row">
+                        <label for="message">Сообщение <span class="req"></span></label>
+                        <textarea name="message" id="message" class="txtarea" tabindex="4" required></textarea>
+                    </div>
+
+                    <div class="center">
+                        <input type="submit" id="submitbtn" name="submitbtn" tabindex="5" value="Отправить Сообщение">
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12 connect-1">
+
+                    <h3>OUR CONTACTS</h3>
+                    <i class="fa fa-phone" aria-hidden="true"> +37497178384</i>
+                    <i class="fa fa-envelope" aria-hidden="true"> capitalsoft@gmail.com</i>
+                    <i class="fa fa-map-marker" aria-hidden="true"> Artsakh Stepanakert Street Martuni 20/1 <br /> Capital Soft office </i>
+                </div>
+                <div class="col-md-12 social-i">
+                    <a href="">
+                        <i class="fa fa-facebook-official" aria-hidden="true" style="
+        background: #619cfd;"></i>
+                    </a>
+                    <a href=""><i class="fa fa-linkedin linkedin" aria-hidden="true"></i></a>
+                    <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+<link rel="stylesheet" href="~/Content/contact-us.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap-3.3.7.js"></script>
