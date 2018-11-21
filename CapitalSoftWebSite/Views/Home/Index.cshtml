@@ -1,5 +1,7 @@
 ﻿@model CapitalSoftWebSite.ViewModel.HomePageModel
 @{
+    /**/
+
 
 
     ViewBag.Title = "Home Page";
@@ -62,7 +64,7 @@
                 {
                     <div class="container wight" id="#work">
                         <div class="desktop col-md-6 col-sm-6 pull-right">
-                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })"  width="100%" alt="">
+                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
                         </div>
 
                         <div class="work-info col-md-6 col-sm-6">
@@ -83,73 +85,73 @@
                             <a href="#win1"></a>
                             <a href="#x" class="overlay" id="win1"></a>
                             @*<div class="popup">
-                                <a class="close" title="Закрыть" href="#close"></a>
-                                <div class="bhover-photo">
-                                    <div id="container">
+                                                                <a class="close" title="Закрыть" href="#close"></a>
+                                                                <div class="bhover-photo">
+                                                                    <div id="container">
 
-                                        <!------------------------------------- THE CONTENT ------------------------------------------------->
-                                        <div class="tra">
-                                            <div id="lofslidecontent45" class="lof-slidecontent">
-                                                <div class="preload"><div></div></div>
-                                                <!-- MAIN CONTENT -->
-                                                <ul class="lof-main-wapper">
+                                                                        <!------------------------------------- THE CONTENT ------------------------------------------------->
+                                                                        <div class="tra">
+                                                                            <div id="lofslidecontent45" class="lof-slidecontent">
+                                                                                <div class="preload"><div></div></div>
+                                                                                <!-- MAIN CONTENT -->
+                                                                                <ul class="lof-main-wapper">
 
-                                                    <img class="mySlides" src=".//images/222.jpg">
-                                                    <img class="mySlides" src=".//images/111.jpg">
-                                                    <img class="mySlides" src=".//images/333.jpg">
-                                                    <img class="mySlides" src=".//images/444.jpg">
+                                                                                    <img class="mySlides" src=".//images/222.jpg">
+                                                                                    <img class="mySlides" src=".//images/111.jpg">
+                                                                                    <img class="mySlides" src=".//images/333.jpg">
+                                                                                    <img class="mySlides" src=".//images/444.jpg">
 
-                                                </ul>
-                                                <!-- END MAIN CONTENT -->
-                                                <!-- NAVIGATOR -->
-                                                <div class="lof-navigator-wapper">
-
-
-                                                    <div class="w3-button lof-next w3-display-left" onclick="plusDivs(-1)" onclick="return false" class="lof-next">Next</div>
-
-                                                    <div class="w3-button lof-previous w3-display-right" onclick="plusDivs(+1)" onclick="return false" class="lof-previous">Previous</div>
+                                                                                </ul>
+                                                                                <!-- END MAIN CONTENT -->
+                                                                                <!-- NAVIGATOR -->
+                                                                                <div class="lof-navigator-wapper">
 
 
-                                                    <!--                <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>-->
+                                                                                    <div class="w3-button lof-next w3-display-left" onclick="plusDivs(-1)" onclick="return false" class="lof-next">Next</div>
 
-                                                    <script>
-      var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-    showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    if (n > x.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = x.length} ;
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-    }
-    x[slideIndex-1].style.display = "block";
-}
-                                                    </script>
+                                                                                    <div class="w3-button lof-previous w3-display-right" onclick="plusDivs(+1)" onclick="return false" class="lof-previous">Previous</div>
 
 
-                                                </div>
-                                            </div>
+                                                                                    <!--                <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>-->
 
-                                        </div>
+                                                                                    <script>
+                                      var slideIndex = 1;
+                                showDivs(slideIndex);
 
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                                <div class="hover-text">
-                                    <h>Disk defender</h>
-                                    <p>
-                                        Разработка landing page для мобильной игры. Создание трендового дизайна, верстка уникального шаблона, адаптация под мобильные устройства, програмирование, посадка на CMS Modx. SEO-оптимизация
-                                    </p>
+                                function plusDivs(n) {
+                                    showDivs(slideIndex += n);
+                                }
 
-                                </div>
-                                <div class="clear"></div>
-                            </div>*@
+                                function showDivs(n) {
+                                    var i;
+                                    var x = document.getElementsByClassName("mySlides");
+                                    if (n > x.length) {slideIndex = 1}
+                                    if (n < 1) {slideIndex = x.length} ;
+                                    for (i = 0; i < x.length; i++) {
+                                        x[i].style.display = "none";
+                                    }
+                                    x[slideIndex-1].style.display = "block";
+                                }
+                                                                                    </script>
+
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                                <div class="hover-text">
+                                                                    <h>Disk defender</h>
+                                                                    <p>
+                                                                        Разработка landing page для мобильной игры. Создание трендового дизайна, верстка уникального шаблона, адаптация под мобильные устройства, програмирование, посадка на CMS Modx. SEO-оптимизация
+                                                                    </p>
+
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                            </div>*@
                         </div>
                     </div>
                 }
@@ -163,92 +165,134 @@ function showDivs(n) {
     }
 </div>
 
-
-
-
-
-    <section id="portfolio">
-        <div>
-            @if (Model.Projects != null)
-            {
-                <h2>@Resources.Resource.Portfolio</h2>
-                foreach (var item in Model.Projects)
-                {
-                    <p>@item.Name</p>
-                    <p>@item.Description</p>
-                    foreach (var elem in item.Images)
-                    {
-                        <div>
-                            <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
-                        </div>
-                    }
-                    <ul>
-                        @if (Model.TeamMembers != null)
-                        {
-                            foreach (var elem in item.Technologies)
-                            {
-                                <li>@elem.Name</li>
-                            }
-                        }
-                    </ul>
-                }
-            }
+<div class="a1-fon">
+    <div class="container work-plan" id="#">
+        <div class="inscription-plan-work">
+            <h1>ЭТАПЫ РАБОТЫ</h1>
+            <h2>ПЛАН РАБОТЫ</h2>
+            <div class="work-plan-0 col-xl-3 col-sm-6 col-md-3">
+                <i class="fa fa-comments" aria-hidden="true"></i>
+                <h3>Обсуждение</h3>
+                <p>Основа создаваемого приложения? Главные задачи сайта? Целевая аудитория? Какие результаты вы хотите получить с его помощью? Основная тематика? Ответы на эти и другие вопросы определяют то, каким будет наш продукт.</p>
+            </div>
+            <div class="work-plan-0 col-xl-3 col-sm-6  col-md-3">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <h3>Создание концепта</h3>
+                <p>Где удобнее расположить элементы дизайна сайта? Как сделать, навигацию как можно проще и удобнее? Как достичь максимального юзабилити. Решение этих вопросов приводит к появлению нескольких вариантов дизайна.</p>
+            </div>
+            <div class="work-plan-0 col-xl-3 col-sm-6  col-md-3">
+                <i class="fa fa-code" aria-hidden="true"></i>
+                <h3>Разработка</h3>
+                <p>Ух! Это самый отчаянный этап. На котором кодят, педалят, програмируют, пилят код, ругаются бывает… В итоге получаем красивый, кроссбраузерный, адаптивный, быстрый удобный сайт.</p>
+            </div>
+            <div class="work-plan-0 col-xl-3 col-sm-6  col-md-3">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <h3>Довольный клиент</h3>
+                <p>Остается только радоваться результату. Клиенту наполнять тематическим контентом ресурс для дальнейшего процветания и продвижения его бизнеса в сети.</p>
+            </div>
         </div>
-    </section>
-    <section id="team">
-        @if (Model.TeamMembers != null)
+    </div>
+</div>
+
+<div class="footer">
+    <div class="bottom-fon col-md-12">
+        <div class="contact-left contact-fon col-md-12 col-sm-12 col-xs-12">
+            <div class="contact">
+                <h3>Наши контакты</h3>
+
+                <i class="fa fa-phone" aria-hidden="true"> +37497178384</i><br>
+                <i class="fa fa-envelope" aria-hidden="true"> capitalsoft@gmail.com</i><br>
+                <i class="fa fa-map-marker" aria-hidden="true"> Artsakh Stepanakert Street Martuni 20/1  <br /> Capital Soft office </i>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@*<section id="portfolio">
+    <div>
+        @if (Model.Projects != null)
         {
-            <h2>@Resources.Resource.Team</h2>
-            foreach (var item in Model.TeamMembers)
+            <h2>@Resources.Resource.Portfolio</h2>
+            foreach (var item in Model.Projects)
             {
-                <p>@item.Firstname</p>
-                <span>@item.Lastname</span>
-                <p>@item.Position</p>
-                if (item.Image != null)
+                <p>@item.Name</p>
+                <p>@item.Description</p>
+                foreach (var elem in item.Images)
                 {
                     <div>
-                        <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
+                        <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
                     </div>
                 }
-                <hr />
+                <ul>
+                    @if (Model.TeamMembers != null)
+                    {
+                        foreach (var elem in item.Technologies)
+                        {
+                            <li>@elem.Name</li>
+                        }
+                    }
+                </ul>
             }
         }
-    </section>
+    </div>
+</section>
+<section id="team">
+    @if (Model.TeamMembers != null)
+    {
+        <h2>@Resources.Resource.Team</h2>
+        foreach (var item in Model.TeamMembers)
+        {
+            <p>@item.Firstname</p>
+            <span>@item.Lastname</span>
+            <p>@item.Position</p>
+            if (item.Image != null)
+            {
+                <div>
+                    <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
+                </div>
+            }
+            <hr />
+        }
+    }
+</section>*@
 
-    <section id="contact">
-        <h3>@Resources.Resource.Contact_Us</h3>
+@*<section id="contact">
+        <h3>@</h3>
         @if (ViewBag.SendMessage != null)
         {
-            <p>@ViewBag.SendMessage</p>
+            <p>@</p>
         }
         @using (Html.BeginForm())
         {
-            @Html.AntiForgeryToken()
+            @
             <div class="form-horizontal">
-                @Html.ValidationSummary(true)
+                @
                 <div class="form-group">
                     <div class="col-md-10">
-                        @Html.EditorFor(m => m.Contact.Name, new { htmlAttributes = new { placeholder = Resources.Resource.Name } })
-                        @Html.ValidationMessageFor(model => model.Contact.Name, "", new { @class = "text-danger" })
+                        @
+                        @
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-10">
-                        @Html.EditorFor(m => m.Contact.Phone, new { htmlAttributes = new { placeholder = Resources.Resource.Phone } })
-                        @Html.ValidationMessageFor(model => model.Contact.Phone, "", new { @class = "text-danger" })
+                        @
+                        @
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-10">
-                        @Html.EditorFor(m => m.Contact.Email, new { htmlAttributes = new { placeholder = Resources.Resource.Email } })
-                        @Html.ValidationMessageFor(model => model.Contact.Email, "", new { @class = "text-danger" })
+                        @
+                        @
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-10">
-                        @Html.TextAreaFor(m => m.Contact.Message, new { placeholder = Resources.Resource.Message })
-                        @Html.ValidationMessageFor(model => model.Contact.Message, "", new { @class = "text-danger" })
+                        @
+                        @
                     </div>
                 </div>
 
@@ -266,8 +310,8 @@ function showDivs(n) {
         <div>
             <i class="fa fa-comments" aria-hidden="true"></i>
         </div>
-    </section>
+    </section>*@
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+
+}

@@ -19,6 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>@Html.DisplayNameFor(model => model.LargeDesc)</th>
             <th>
                 @Html.DisplayNameFor(model => model.Lang)
             </th>
@@ -28,33 +29,36 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lang)
-            </td>
-            <td>
-                <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Edit", "Projects", new { id = item.ProjectID })'">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID })
-                |
-                <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Details", "Projects", new { id = item.ProjectID })'">
-                    <span class="glyphicon glyphicon-list" data-placement="top" data-toggle="tooltip"></span>
-                </button>
-                @Html.ActionLink("Details", "Details", new { id = item.ProjectID })
-                |
-                <button class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "Projects", new { id = item.ProjectID })'">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LargeDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lang)
+        </td>
+        <td>
+            <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Edit", "Projects", new { id = item.ProjectID })'">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID })
+            |
+            <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Details", "Projects", new { id = item.ProjectID })'">
+                <span class="glyphicon glyphicon-list" data-placement="top" data-toggle="tooltip"></span>
+            </button>
+            @Html.ActionLink("Details", "Details", new { id = item.ProjectID })
+            |
+            <button class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "Projects", new { id = item.ProjectID })'">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID })
+        </td>
+    </tr>
     }
 
 </table>

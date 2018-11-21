@@ -17,6 +17,8 @@ namespace CapitalSoftWebSite.Models
         public string Description { set; get; }
         public ICollection<Image> Images { set; get; }
         public string Lang { set; get; }
+        [MaxLength(4000)]
+        public string LargeDesc { set; get; }
         [NotMapped]
         public virtual ICollection<Technology> Technologies { set; get; } = new List<Technology>();
     }

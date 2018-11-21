@@ -19,16 +19,16 @@ namespace CapitalSoftWebSite.Controllers
         public ActionResult Index()
         {
             var model = new HomePageModel();
-            try
-            {
+            //try
+            //{
                 model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
                 model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
                 ViewBag.SendMessage = "";
-            }
-            catch (Exception)
-            {
-                Response.StatusCode = 500;
-            }
+           // }
+            //catch (Exception)
+            //{
+            //    Response.StatusCode = 500;
+            //}
             return View(model);
         }
 
