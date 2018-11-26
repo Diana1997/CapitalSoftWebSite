@@ -9,6 +9,10 @@ namespace CapitalSoftWebSite.Models
 {
     public class Project
     {
+        public Project()
+        {
+            Technologies = new List<Technology>();
+        }
         public int ProjectID { set; get; }
         [Required]
         public string Name { set; get; }
@@ -20,6 +24,6 @@ namespace CapitalSoftWebSite.Models
         [MaxLength(4000)]
         public string LargeDesc { set; get; }
         [NotMapped]
-        public virtual ICollection<Technology> Technologies { set; get; } = new List<Technology>();
+        public virtual ICollection<Technology> Technologies { set; get; }
     }
 }
