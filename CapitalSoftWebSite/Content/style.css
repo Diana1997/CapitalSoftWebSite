@@ -831,14 +831,6 @@ a:focus:after {
         background: #7b7777db;
     }
 
-.prev {
-    margin: 5.4% 0 0 -48.7%;
-    position: absolute;
-    padding: 35.9% 7%;
-    background: #7d7e824f;
-    border: 0px;
-}
-
     .prev:hover {
         background: #7b7777db;
     }
@@ -1116,4 +1108,9 @@ a:focus:after {
     .contact-padding .container {
         width: 970px !important;
     }
+}
+
+.more-btn {
+    padding: 8px 60px;
+    margin: 5px -15px;
 }

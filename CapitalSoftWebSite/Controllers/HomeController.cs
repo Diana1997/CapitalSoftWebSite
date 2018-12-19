@@ -58,6 +58,14 @@ namespace CapitalSoftWebSite.Controllers
             return null;
         }
 
+        [HttpGet]
+        public ActionResult More(int id)
+        {
+            Project p = new DbAdaptor().GetProject(id);
+            if (p != null)
+                return PartialView(p);
+            return HttpNotFound();
+        }
 
         public ActionResult SetCulture(string lang)
         {

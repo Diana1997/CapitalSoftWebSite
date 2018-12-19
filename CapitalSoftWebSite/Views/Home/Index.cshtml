@@ -2,6 +2,8 @@
 @{
     /**/
 
+    /**/
+
 
 
     ViewBag.Title = "Home Page";
@@ -60,13 +62,20 @@
             int i = 0;
             foreach (var elem in Model.Projects)
             {
-                if (i % 2 == 0)
-                {
-                    <div class="container wight" id="#work">
-                        <div class="desktop col-md-6 col-sm-6 pull-right">
-                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
-                        </div>
 
+                    <div class="container wight" id="#work">
+                        @if (i % 2 == 0)
+                        {
+                            <div class="desktop col-md-6 col-sm-6 pull-right">
+                                <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="desktop col-md-6 col-sm-6 pull-left">
+                                <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
+                            </div>
+                        }
                         <div class="work-info col-md-6 col-sm-6">
                             <h1>@elem.Name</h1>
                             <p>@elem.Description</p>
@@ -81,87 +90,18 @@
                                 }
                             </ul>
                             <div class="line"></div>
-                            <a href="#win1" class="bottom">подробнее</a>
-                            <a href="#win1"></a>
-                            <a href="#x" class="overlay" id="win1"></a>
-                            @*<div class="popup">
-                                                                <a class="close" title="Закрыть" href="#close"></a>
-                                                                <div class="bhover-photo">
-                                                                    <div id="container">
+                            <div class="container">
+                                <button class="btn btn-primary more-btn" data-toggle="modal" data-target="#@elem.ProjectID">
+                                    More
+                                </button>
+                                @{ Html.RenderPartial("More", elem); }
 
-                                                                        <!------------------------------------- THE CONTENT ------------------------------------------------->
-                                                                        <div class="tra">
-                                                                            <div id="lofslidecontent45" class="lof-slidecontent">
-                                                                                <div class="preload"><div></div></div>
-                                                                                <!-- MAIN CONTENT -->
-                                                                                <ul class="lof-main-wapper">
-
-                                                                                    <img class="mySlides" src=".//images/222.jpg">
-                                                                                    <img class="mySlides" src=".//images/111.jpg">
-                                                                                    <img class="mySlides" src=".//images/333.jpg">
-                                                                                    <img class="mySlides" src=".//images/444.jpg">
-
-                                                                                </ul>
-                                                                                <!-- END MAIN CONTENT -->
-                                                                                <!-- NAVIGATOR -->
-                                                                                <div class="lof-navigator-wapper">
-
-
-                                                                                    <div class="w3-button lof-next w3-display-left" onclick="plusDivs(-1)" onclick="return false" class="lof-next">Next</div>
-
-                                                                                    <div class="w3-button lof-previous w3-display-right" onclick="plusDivs(+1)" onclick="return false" class="lof-previous">Previous</div>
-
-
-                                                                                    <!--                <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>-->
-
-                                                                                    <script>
-                                      var slideIndex = 1;
-                                showDivs(slideIndex);
-
-                                function plusDivs(n) {
-                                    showDivs(slideIndex += n);
-                                }
-
-                                function showDivs(n) {
-                                    var i;
-                                    var x = document.getElementsByClassName("mySlides");
-                                    if (n > x.length) {slideIndex = 1}
-                                    if (n < 1) {slideIndex = x.length} ;
-                                    for (i = 0; i < x.length; i++) {
-                                        x[i].style.display = "none";
-                                    }
-                                    x[slideIndex-1].style.display = "block";
-                                }
-                                                                                    </script>
-
-
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="clear"></div>
-                                                                <div class="hover-text">
-                                                                    <h>Disk defender</h>
-                                                                    <p>
-                                                                        Разработка landing page для мобильной игры. Создание трендового дизайна, верстка уникального шаблона, адаптация под мобильные устройства, програмирование, посадка на CMS Modx. SEO-оптимизация
-                                                                    </p>
-
-                                                                </div>
-                                                                <div class="clear"></div>
-                                                            </div>*@
+                            </div>
                         </div>
                     </div>
-                }
-                else
-                {
-
-                }
-                ++i;
-            }
-        }
+                 ++i;
+               }
+             }
     }
 </div>
 
@@ -212,52 +152,52 @@
 </div>
 
 @*<section id="portfolio">
-    <div>
-        @if (Model.Projects != null)
-        {
-            <h2>@Resources.Resource.Portfolio</h2>
-            foreach (var item in Model.Projects)
+        <div>
+            @if (Model.Projects != null)
             {
-                <p>@item.Name</p>
-                <p>@item.Description</p>
-                foreach (var elem in item.Images)
+                <h2>@Resources.Resource.Portfolio</h2>
+                foreach (var item in Model.Projects)
+                {
+                    <p>@item.Name</p>
+                    <p>@item.Description</p>
+                    foreach (var elem in item.Images)
+                    {
+                        <div>
+                            <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
+                        </div>
+                    }
+                    <ul>
+                        @if (Model.TeamMembers != null)
+                        {
+                            foreach (var elem in item.Technologies)
+                            {
+                                <li>@elem.Name</li>
+                            }
+                        }
+                    </ul>
+                }
+            }
+        </div>
+    </section>
+    <section id="team">
+        @if (Model.TeamMembers != null)
+        {
+            <h2>@Resources.Resource.Team</h2>
+            foreach (var item in Model.TeamMembers)
+            {
+                <p>@item.Firstname</p>
+                <span>@item.Lastname</span>
+                <p>@item.Position</p>
+                if (item.Image != null)
                 {
                     <div>
-                        <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
+                        <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
                     </div>
                 }
-                <ul>
-                    @if (Model.TeamMembers != null)
-                    {
-                        foreach (var elem in item.Technologies)
-                        {
-                            <li>@elem.Name</li>
-                        }
-                    }
-                </ul>
+                <hr />
             }
         }
-    </div>
-</section>
-<section id="team">
-    @if (Model.TeamMembers != null)
-    {
-        <h2>@Resources.Resource.Team</h2>
-        foreach (var item in Model.TeamMembers)
-        {
-            <p>@item.Firstname</p>
-            <span>@item.Lastname</span>
-            <p>@item.Position</p>
-            if (item.Image != null)
-            {
-                <div>
-                    <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
-                </div>
-            }
-            <hr />
-        }
-    }
-</section>*@
+    </section>*@
 
 @*<section id="contact">
         <h3>@</h3>
@@ -312,6 +252,3 @@
         </div>
     </section>*@
 
-@section Scripts {
-
-}
