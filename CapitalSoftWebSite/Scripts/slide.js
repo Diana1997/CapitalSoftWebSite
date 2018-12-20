@@ -33,3 +33,10 @@ document.getElementById('next').addEventListener('click', (event) => {
     plusSlides(1);
     event.preventDefault();
 });
+
+/*Modal popup function*/
+$(function () {
+    $('#approve-btn').click(function () {
+        $('#modal-container').modal('hide');
+    });
+});

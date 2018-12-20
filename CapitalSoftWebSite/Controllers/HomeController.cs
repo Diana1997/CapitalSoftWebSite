@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,26 +17,28 @@ namespace CapitalSoftWebSite.Controllers
     {
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var model = new HomePageModel();
-            model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
-            model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
+            model.TeamMembers = await new DbAdaptor().GetTeamMembersAsync(cultureName);
+            model.Projects = await new DbAdaptor().GetProjectsFullAsync(cultureName);
             ViewBag.SendMessage = "";
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Contact contact, string lang)
+        public async Task<ActionResult> Index(Contact contact, string lang)
         {
             var model = new HomePageModel();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if(new DbAdaptor().CreateContact(contact) > 0)
+                    int b =  await new DbAdaptor().CreateContactAsync(contact);
+                    if (b > 0)
                     {
+                        //ToDo check int 
                         ViewBag.SendMessage = Resources.Resource.Message_sent; 
                         ModelState.Clear();
                     }
@@ -58,15 +61,6 @@ namespace CapitalSoftWebSite.Controllers
             return null;
         }
 
-        [HttpGet]
-        public ActionResult More(int id)
-        {
-            Project p = new DbAdaptor().GetProject(id);
-            if (p != null)
-                return PartialView(p);
-            return HttpNotFound();
-        }
-
         public ActionResult SetCulture(string lang)
         {
             lang = CultureHelper.GetImplementedCulture(lang);
@@ -82,6 +76,15 @@ namespace CapitalSoftWebSite.Controllers
             }
             Response.Cookies.Add(cookie);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult More(int id)
+        {
+            Project model = new DbAdaptor().GetProject(id);
+            if (model == null)
+                return HttpNotFound();
+            return PartialView("_More", model);
         }
     }
 }

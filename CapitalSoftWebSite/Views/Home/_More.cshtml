@@ -1,13 +1,13 @@
 ﻿@model CapitalSoftWebSite.Models.Project
 
-<div class="modal" id="@Model.ProjectID">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
             <div class="modal-header">
                 <h4 class="modal-title">@Html.DisplayFor(model => model.Name)</h4>
             </div>
-            <div class="modal-body">
-                <p>@Html.DisplayFor(model => model.Description)</p>
+            <p>@Html.DisplayFor(model => model.Description)</p>
+            <div class="alert">
                 <div class="slideshow-container">
                     @foreach (var item in Model.Images)
                     {
@@ -15,9 +15,9 @@
                             <img src="@Url.Action("GetImage", "Home", new { item.ImageID })" alt="" style="width:100%" />
                         </div>
                     }
-                    <a class="prev" @*onclick="plusSlides(-1)"*@ id="prev">&#10094;</a>
-                    <a class="next" @*onclick="plusSlides(1)"*@ id="next">&#10095;</a>
-                </div>                                     
+                </div>
+                <a class="prev"  id="prev">&#10094;</a>
+                <a class="next"  id="next">&#10095;</a>
                 <br>
                 <div style="text-align:center">
                     @{
@@ -33,17 +33,21 @@
                             } while (j < count);
                         }
                     }
-                    @*<span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>*@
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
-        </div>
+    </div>
+
+
+
+
+
 </div>
 
-<link rel="stylesheet" href="~/Content/slide.css" type="text/css"/>
+
+<link rel="stylesheet" href="~/Content/slide.css" type="text/css" />
 <script src="~/Scripts/slide.js"></script>

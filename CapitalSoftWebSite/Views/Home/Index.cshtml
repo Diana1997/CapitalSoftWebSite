@@ -63,45 +63,45 @@
             foreach (var elem in Model.Projects)
             {
 
-                    <div class="container wight" id="#work">
-                        @if (i % 2 == 0)
-                        {
-                            <div class="desktop col-md-6 col-sm-6 pull-right">
-                                <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="desktop col-md-6 col-sm-6 pull-left">
-                                <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
-                            </div>
-                        }
-                        <div class="work-info col-md-6 col-sm-6">
-                            <h1>@elem.Name</h1>
-                            <p>@elem.Description</p>
-                            <h1>@Resources.Resource.Technologies</h1>
-                            <ul>
-                                @if (elem.Technologies != null)
+                <div class="container wight" id="#work">
+                    @if (i % 2 == 0)
+                    {
+                        <div class="desktop col-md-6 col-sm-6 pull-right">
+                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="desktop col-md-6 col-sm-6 pull-left">
+                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
+                        </div>
+                    }
+                    <div class="work-info col-md-6 col-sm-6">
+                        <h1>@elem.Name</h1>
+                        <p>@elem.Description</p>
+                        <h1>@Resources.Resource.Technologies</h1>
+                        <ul>
+                            @if (elem.Technologies != null)
+                            {
+                                foreach (var t in elem.Technologies)
                                 {
-                                    foreach (var t in elem.Technologies)
-                                    {
-                                        <li>@t.Name</li>
-                                    }
+                                    <li>@t.Name</li>
                                 }
-                            </ul>
-                            <div class="line"></div>
-                            <div class="container">
-                                <button class="btn btn-primary more-btn" data-toggle="modal" data-target="#@elem.ProjectID">
-                                    More
-                                </button>
-                                @{ Html.RenderPartial("More", elem); }
-
-                            </div>
+                            }
+                        </ul>
+                        <div class="line"></div>
+                        <div class="container">
+                            @*<button class="btn btn-primary more-btn" data-toggle="modal" data-target="#@elem.ProjectID">
+                                More
+                            </button>*@
+                            @*@{ Html.RenderPartial("More", elem); }*@
+                            @Html.ActionLink("More", "More", "Home", new {id = elem.ProjectID }, new { @class = "modal-link btn btn-success"})
                         </div>
                     </div>
-                 ++i;
-               }
-             }
+                </div>
+                ++i;
+            }
+        }
     }
 </div>
 
@@ -151,104 +151,7 @@
     </div>
 </div>
 
-@*<section id="portfolio">
-        <div>
-            @if (Model.Projects != null)
-            {
-                <h2>@Resources.Resource.Portfolio</h2>
-                foreach (var item in Model.Projects)
-                {
-                    <p>@item.Name</p>
-                    <p>@item.Description</p>
-                    foreach (var elem in item.Images)
-                    {
-                        <div>
-                            <img src="@Url.Action("GetImage", "Home", new { elem.ImageID })" width="300" height="300" />
-                        </div>
-                    }
-                    <ul>
-                        @if (Model.TeamMembers != null)
-                        {
-                            foreach (var elem in item.Technologies)
-                            {
-                                <li>@elem.Name</li>
-                            }
-                        }
-                    </ul>
-                }
-            }
-        </div>
-    </section>
-    <section id="team">
-        @if (Model.TeamMembers != null)
-        {
-            <h2>@Resources.Resource.Team</h2>
-            foreach (var item in Model.TeamMembers)
-            {
-                <p>@item.Firstname</p>
-                <span>@item.Lastname</span>
-                <p>@item.Position</p>
-                if (item.Image != null)
-                {
-                    <div>
-                        <img src="@Url.Action("GetImage", "Home", new { item.ImageId})" width="300" height="300" />
-                    </div>
-                }
-                <hr />
-            }
-        }
-    </section>*@
 
-@*<section id="contact">
-        <h3>@</h3>
-        @if (ViewBag.SendMessage != null)
-        {
-            <p>@</p>
-        }
-        @using (Html.BeginForm())
-        {
-            @
-            <div class="form-horizontal">
-                @
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @
-                        @
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @
-                        @
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @
-                        @
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @
-                        @
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input value="@Resources.Resource.Send" type="submit" class="btn-success" />
-                    </div>
-                </div>
-            </div>
-        }
-
-    </section>
-
-    <section id="stagesOfWork">
-        <div>
-            <i class="fa fa-comments" aria-hidden="true"></i>
-        </div>
-    </section>*@
 

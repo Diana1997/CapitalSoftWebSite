@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,27 +12,28 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
     //[Authorize]
     public class ContactsController : Controller
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(new DbAdaptor().GetContacts());
+            var contact = await new DbAdaptor().GetContactsAsync();
+            return View();
         }
 
-        public ActionResult Details(int? id)
+        public async Task<ActionResult>  Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Contact technology = new DbAdaptor().GetContact(id);
+            Contact technology = await  new DbAdaptor().GetContactAsync(id);
             if (technology == null)
                 return HttpNotFound();
 
             return View(technology);
         }
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Contact contact = new DbAdaptor().GetContact(id);
+            Contact contact = await  new DbAdaptor().GetContactAsync(id);
             if (contact == null)
                 return HttpNotFound();
 
@@ -40,9 +42,9 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            new DbAdaptor().DeleteContact(id);
+            await new DbAdaptor().DeleteContactAsync(id);
             return RedirectToAction("Index");
         }
     }
