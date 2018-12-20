@@ -6,7 +6,18 @@
             <div class="modal-header">
                 <h4 class="modal-title">@Html.DisplayFor(model => model.Name)</h4>
             </div>
-            <p>@Html.DisplayFor(model => model.Description)</p>
+
+            @{
+                if (ViewBag.Portfolio == true)
+                {
+                    <p>@Html.DisplayFor(model => model.LargeDesc)</p>
+                }
+                else
+                {
+                    <p>@Html.DisplayFor(model => model.Description)</p>
+                }
+            }
+
             <div class="alert">
                 <div class="slideshow-container">
                     @foreach (var item in Model.Images)
@@ -16,8 +27,8 @@
                         </div>
                     }
                 </div>
-                <a class="prev"  id="prev">&#10094;</a>
-                <a class="next"  id="next">&#10095;</a>
+                <a class="prev" id="prev">&#10094;</a>
+                <a class="next" id="next">&#10095;</a>
                 <br>
                 <div style="text-align:center">
                     @{

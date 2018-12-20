@@ -329,10 +329,10 @@ namespace CapitalSoftWebSite.Models
                 db.SaveChanges();
             }
         }
-        public IList<Project> GetProjectsAsync()
+        public async Task<IList<Project>> GetProjectsAsync()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.Projects.Include(x => x.Images).ToList();
+                return  await db.Projects.Include(x => x.Images).ToListAsync();
         }
 
         public async Task<IList<Project>> GetProjectsFullAsync(string culture)

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CapitalSoftWebSite.Models.Project>
+
+<div class="work" id="portfolio">
+    @{
+        if (Model != null)
+        {
+            int i = 0;
+            foreach (var elem in Model)
+            {
+
+                <div class="container wight" id="#work">
+                    @if (i % 2 == 0)
+                    {
+                        <div class="desktop col-md-6 col-sm-6 pull-right">
+                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="desktop col-md-6 col-sm-6 pull-left">
+                            <img src="@Url.Action("GetImage", "Home", new { elem.Images.First().ImageID })" width="100%" alt="">
+                        </div>
+                    }
+                    <div class="work-info col-md-6 col-sm-6">
+                        <h1>@elem.Name</h1>
+                        <p>@elem.Description</p>
+                        <h1>@Resources.Resource.Technologies</h1>
+                        <ul>
+                            @if (elem.Technologies != null)
+                            {
+                                foreach (var t in elem.Technologies)
+                                {
+                                    <li>@t.Name</li>
+                                }
+                            }
+                        </ul>
+                        <div class="line"></div>
+                        <div class="container">
+                            @*<button class="btn btn-primary more-btn" data-toggle="modal" data-target="#@elem.ProjectID">
+                                    More
+                                </button>*@
+                            @*@{ Html.RenderPartial("More", elem); }*@
+                            @Html.ActionLink("More", "More", "Portfolio", new { id = elem.ProjectID }, new { @class = "modal-link btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                ++i;
+            }
+        }
+    }
+</div>
