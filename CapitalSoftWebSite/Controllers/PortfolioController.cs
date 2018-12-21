@@ -13,17 +13,17 @@ namespace CapitalSoftWebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            IList<Project> list = await new DbAdaptor().GetProjectsFullAsync(cultureName);
+            IList<Project> list = await DbAdaptor.GetProjectsFullAsync(cultureName);
             return View(list);
         }
 
 
         [HttpGet]
-        public ActionResult More(int id)
+        public async Task<ActionResult> More(int id)
         {
             ViewBag.Portfolio = true;
 
-            Project model = new DbAdaptor().GetProject(id);
+            Project model = await DbAdaptor.GetProjectAsync(id);
             if (model == null)
                 return HttpNotFound();
             return PartialView("~/Views/Home/_More.cshtml", model);

@@ -14,7 +14,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            var contact = await new DbAdaptor().GetContactsAsync();
+            var contact = await  DbAdaptor.GetContactsAsync();
             return View();
         }
 
@@ -23,7 +23,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Contact technology = await  new DbAdaptor().GetContactAsync(id);
+            Contact technology = await   DbAdaptor.GetContactAsync(id);
             if (technology == null)
                 return HttpNotFound();
 
@@ -33,7 +33,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Contact contact = await  new DbAdaptor().GetContactAsync(id);
+            Contact contact = await DbAdaptor.GetContactAsync(id);
             if (contact == null)
                 return HttpNotFound();
 
@@ -44,7 +44,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            await new DbAdaptor().DeleteContactAsync(id);
+            await  DbAdaptor.DeleteContactAsync(id);
             return RedirectToAction("Index");
         }
     }

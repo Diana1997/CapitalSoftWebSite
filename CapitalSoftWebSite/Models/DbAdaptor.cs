@@ -8,334 +8,82 @@ namespace CapitalSoftWebSite.Models
     public class DbAdaptor
     {
         #region Team Members
-        public int CreateTeamMember(TeamMember teamMember)
+        public static async Task<int> CreateTeamMemberAsync(TeamMember teamMember)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
                 db.TeamMembers.Add(teamMember);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return teamMember.TeamMemberID;
             }
         }
-        public IList<TeamMember> GetTeamMembers()
+        public static async Task<IList<TeamMember>> GetTeamMembersAsync()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.TeamMembers.Include(t => t.Image).ToList();
+                return await db.TeamMembers.Include(t => t.Image)?.ToListAsync();
         }
 
-        public async Task<IList<TeamMember>> GetTeamMembers(string culture)
+        public static async Task<IList<TeamMember>> GetTeamMembersAsync(string culture)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
                 return await db.TeamMembers.Include(t => t.Image).Where(x => x.Lang == culture)?.ToListAsync();
         }
-        public TeamMember GetTeamMember(int? id)
+        public static async Task<TeamMember> GetTeamMemberAsync(int? id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.TeamMembers.Include(x => x.Image).Where(x => x.TeamMemberID == id).FirstOrDefault();
+                return await db.TeamMembers.Include(x => x.Image).Where(x => x.TeamMemberID == id).FirstOrDefaultAsync();
         }
 
-        public void DeleteTeamMember(int id)
+        public static async Task DeleteTeamMemberAsync(int id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
-                TeamMember teamMember = db.TeamMembers
+                TeamMember teamMember = await db.TeamMembers
                     .Include(x => x.Image)
                     .Where(x => x.TeamMemberID == id)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
                 if (teamMember.Image != null)
                     db.Images.Remove(teamMember.Image);
                 db.TeamMembers.Remove(teamMember);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
-        public void EditTeamMember(TeamMember teamMember)
+        public static async Task EditTeamMemberAsync(TeamMember teamMember)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
                 db.Entry(teamMember).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
-        #endregion
-
-
-        #region Image
-        public int CreateImage(Image image)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.Images.Add(image);
-                db.SaveChanges();
-                return image.ImageID;
-            }
-        }
-        public Image GetImage(int id)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.Images.Find(id);
-        }
-        public void DeleteImage(int id)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                Image image = db.Images.Find(id);
-                db.Images.Remove(image);
-                db.SaveChanges();
-            }
-        }
-        #endregion
-
-        #region  Technology
-        public int CreateTechnology(Technology technology)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.Technologies.Add(technology);
-                db.SaveChanges();
-                return technology.TechnologyID;
-            }
-        }
-        public void EditTechnology(Technology technology)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.Entry(technology).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-        }
-        public void DeleteTechnology(int id)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                Technology technology = db.Technologies.Find(id);
-                db.Technologies.Remove(technology);
-                db.SaveChanges();
-            }
-        }
-        public IList<Technology> GetTechnologies()
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.Technologies.ToList();
-        }
-
-        public Technology GetTechnology(int? id)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.Technologies.Find(id);
-        }
-
-        #endregion
-
-        #region Project
-        public int CreateProject(Project project)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.Projects.Add(project);
-                db.SaveChanges();
-                return project.ProjectID;
-            }
-        }
-
-        public void EditProject(Project project)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-        }
-        public IList<Project> GetProjects()
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return db.Projects.Include(x=> x.Images).ToList();
-        }
-
-        public IList<Project> GetProjectsFull()
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                Technology technology = null;
-                var projectList = db.Projects.Include(x => x.Images).ToList();
-
-                foreach (var elem in projectList)
-                {
-                    var ptList = db.ProjectTechnologies.Where(x => x.ProjectID == elem.ProjectID).ToList();
-                    foreach(var k in ptList)
-                    {
-                        technology = db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
-                        if (technology != null)
-                            elem.Technologies.Add(technology);
-                    }
-                }
-                return projectList;
-            }
-        }
-       
-        public Project GetProject(int? id)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                Technology technology = null;
-                Project project = db.Projects.Include(x => x.Images).Where(x => x.ProjectID == id).FirstOrDefault();
-                var projectTechnologies = db.ProjectTechnologies.Where(x => x.ProjectID == project.ProjectID).ToList();
-                foreach(var elem in projectTechnologies)
-                {
-                    technology = db.Technologies.Where(x => x.TechnologyID == elem.TechnologyID).FirstOrDefault();
-                    project.Technologies.Add(technology);
-                }
-                return project;
-            }
-        }
-
-        public void DeleteProject(int id)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                Project project = db.Projects
-                    .Include(x => x.Images)
-                    .Where(x => x.ProjectID == id)
-                    .ToList()
-                    .FirstOrDefault();
-                var ptList = db.ProjectTechnologies.Where(x => x.ProjectID == project.ProjectID);
-                db.ProjectTechnologies.RemoveRange(ptList);
-                db.Images.RemoveRange(project.Images);
-                db.Projects.Remove(project);
-                db.SaveChanges();
-            }
-        }
-        #endregion
-
-        #region ProjectTechnology
-        public int CreateProjectTechnology(ProjectTechnology projectTechnology)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                db.ProjectTechnologies.Add(projectTechnology);
-                db.SaveChanges();
-                return projectTechnology.ProjectTechnologyID;
-            }
-        }
-        public void DeleteProjectTechnology(int projectID, int technologyID)
-        {
-            using (var db = new AppDbContext(ConnectionParameters.connectionString))
-            {
-                ProjectTechnology projectTechnology = db.ProjectTechnologies
-                    .Where(x => x.ProjectID == projectID && x.TechnologyID == technologyID)
-                    .FirstOrDefault();
-                db.ProjectTechnologies.Remove(projectTechnology);
-                db.SaveChanges();
-            }
-        }
-        #endregion
-
-        #region Contact
-        //public async Task<int> CreateContact(Contact contact)
-        //{
-        //    using (var db = new AppDbContext(ConnectionParameters.connectionString))
-        //    {
-        //        db.Contacts.Add(contact);
-        //        await db.SaveChangesAsync();
-        //        return contact.ContactID;
-        //    }
-        //}
-        //public async Task<IList<Contact>> GetContacts()
-        //{
-        //    using (var db = new AppDbContext(ConnectionParameters.connectionString))
-        //        return  await db.Contacts.ToListAsync();
-        //}
-        
-        //public async Task<Contact> GetContact(int? id)
-        //{
-        //    using (var db = new AppDbContext(ConnectionParameters.connectionString))
-        //        return await db.Contacts.FindAsync(id);
-        //}
-
-        //public async void DeleteContact(int id)
-        //{
-        //    using (var db = new AppDbContext(ConnectionParameters.connectionString))
-        //    {
-        //        Contact contact = await db.Contacts.FindAsync(id);
-        //        db.Contacts.Remove(contact);
-        //        await db.SaveChangesAsync();
-        //    }
-        //}
-        #endregion
-
-
-        #region async
-        #region Team Members
-            public int CreateTeamMemberAsync(TeamMember teamMember)
-            {
-                using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                {
-                    db.TeamMembers.Add(teamMember);
-                    db.SaveChanges();
-                    return teamMember.TeamMemberID;
-                }
-            }
-
-            public async Task<IList<TeamMember>> GetTeamMembersAsync(string culture)
-            {
-                using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                    return await db.TeamMembers.Include(t => t.Image).Where(x => x.Lang == culture)?.ToListAsync();
-            }
-            public TeamMember GetTeamMemberAsync(int? id)
-            {
-                using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                    return db.TeamMembers.Include(x => x.Image).Where(x => x.TeamMemberID == id).FirstOrDefault();
-            }
-
-            public void DeleteTeamMemberAsync(int id)
-            {
-                using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                {
-                    TeamMember teamMember = db.TeamMembers
-                        .Include(x => x.Image)
-                        .Where(x => x.TeamMemberID == id)
-                        .FirstOrDefault();
-                    if (teamMember.Image != null)
-                        db.Images.Remove(teamMember.Image);
-                    db.TeamMembers.Remove(teamMember);
-                    db.SaveChanges();
-                }
-            }
-            public void EditTeamMemberAsync(TeamMember teamMember)
-            {
-                using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                {
-                    db.Entry(teamMember).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-            }
         #endregion
 
         #region Projects
-        public int CreateProjectAsync(Project project)
+        public static async Task<int> CreateProjectAsync(Project project)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
                 db.Projects.Add(project);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return project.ProjectID;
             }
         }
 
-        public void EditProjectAsync(Project project)
+        public static async Task EditProjectAsync(Project project)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
                 db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
-        public async Task<IList<Project>> GetProjectsAsync()
+        public static async Task<IList<Project>> GetProjectsAsync()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
-                return  await db.Projects.Include(x => x.Images).ToListAsync();
+                return await db.Projects.Include(x => x.Images).ToListAsync();
         }
 
-        public async Task<IList<Project>> GetProjectsFullAsync(string culture)
+        public static async Task<IList<Project>> GetProjectsFullAsync(string culture)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
@@ -347,7 +95,7 @@ namespace CapitalSoftWebSite.Models
                     var ptList = await db.ProjectTechnologies.Where(x => x.ProjectID == elem.ProjectID).ToListAsync();
                     foreach (var k in ptList)
                     {
-                        technology =  db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
+                        technology = db.Technologies.Where(x => x.TechnologyID == k.TechnologyID).FirstOrDefault();
                         if (technology != null)
                             elem.Technologies.Add(technology);
                     }
@@ -356,13 +104,13 @@ namespace CapitalSoftWebSite.Models
             }
         }
 
-        public Project GetProjectAsync(int? id)
+        public static async Task<Project> GetProjectAsync(int? id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
                 Technology technology = null;
                 Project project = db.Projects.Include(x => x.Images).Where(x => x.ProjectID == id).FirstOrDefault();
-                var projectTechnologies = db.ProjectTechnologies.Where(x => x.ProjectID == project.ProjectID).ToList();
+                var projectTechnologies = await db.ProjectTechnologies.Where(x => x.ProjectID == project.ProjectID).ToListAsync();
                 foreach (var elem in projectTechnologies)
                 {
                     technology = db.Technologies.Where(x => x.TechnologyID == elem.TechnologyID).FirstOrDefault();
@@ -372,7 +120,7 @@ namespace CapitalSoftWebSite.Models
             }
         }
 
-        public void DeleteProjectAsync(int id)
+        public static async Task DeleteProjectAsync(int id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
@@ -385,13 +133,13 @@ namespace CapitalSoftWebSite.Models
                 db.ProjectTechnologies.RemoveRange(ptList);
                 db.Images.RemoveRange(project.Images);
                 db.Projects.Remove(project);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
         #endregion
 
         #region Contact
-        public async Task<int> CreateContactAsync(Contact contact)
+        public static async Task<int> CreateContactAsync(Contact contact)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
@@ -400,19 +148,19 @@ namespace CapitalSoftWebSite.Models
                 return contact.ContactID;
             }
         }
-        public async Task<IList<Contact>> GetContactsAsync()
+        public static async Task<IList<Contact>> GetContactsAsync()
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
                 return await db.Contacts.ToListAsync();
         }
 
-        public async Task<Contact> GetContactAsync(int? id)
+        public static async Task<Contact> GetContactAsync(int? id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
                 return await db.Contacts.FindAsync(id);
         }
 
-        public async Task DeleteContactAsync(int id)
+        public static async Task DeleteContactAsync(int id)
         {
             using (var db = new AppDbContext(ConnectionParameters.connectionString))
             {
@@ -422,7 +170,95 @@ namespace CapitalSoftWebSite.Models
             }
         }
         #endregion
+
+        #region  Technology
+        public static async Task<int> CreateTechnologyAsync(Technology technology)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Technologies.Add(technology);
+                await db.SaveChangesAsync();
+                return technology.TechnologyID;
+            }
+        }
+        public static async Task EditTechnologyAsync(Technology technology)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Entry(technology).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+        public static async Task DeleteTechnologyAsync(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                Technology technology = await db.Technologies.FindAsync(id);
+                db.Technologies.Remove(technology);
+                await db.SaveChangesAsync();
+            }
+        }
+        public static async Task<IList<Technology>> GetTechnologiesAsync()
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return await db.Technologies?.ToListAsync();
+        }
+
+        public static async Task<Technology> GetTechnologyAsync(int? id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return await db.Technologies.FindAsync(id);
+        }
+
         #endregion
 
+        #region Image
+        public static async Task<int> CreateImageAsync(Image image)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.Images.Add(image);
+                await db.SaveChangesAsync();
+                return image.ImageID;
+            }
+        }
+        public static async Task<Image> GetImageAsync(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+                return await db.Images.FindAsync(id);
+        }
+        public static async Task DeleteImageAsync(int id)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                Image image = db.Images.Find(id);
+                db.Images.Remove(image);
+                await db.SaveChangesAsync();
+            }
+        }
+        #endregion
+
+        #region ProjectTechnology
+        public static async Task<int> CreateProjectTechnologyAsync(ProjectTechnology projectTechnology)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                db.ProjectTechnologies.Add(projectTechnology);
+                await db.SaveChangesAsync();
+                return projectTechnology.ProjectTechnologyID;
+            }
+        }
+        public static async Task DeleteProjectTechnologyAsync(int projectID, int technologyID)
+        {
+            using (var db = new AppDbContext(ConnectionParameters.connectionString))
+            {
+                ProjectTechnology projectTechnology = db.ProjectTechnologies
+                    .Where(x => x.ProjectID == projectID && x.TechnologyID == technologyID)
+                    .FirstOrDefault();
+                db.ProjectTechnologies.Remove(projectTechnology);
+                await db.SaveChangesAsync();
+            }
+        }
+        #endregion
     }
 }

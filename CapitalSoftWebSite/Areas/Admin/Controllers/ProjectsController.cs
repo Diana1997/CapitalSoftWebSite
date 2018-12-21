@@ -14,38 +14,39 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
     //[Authorize]
     public class ProjectsController : Controller
     {
-
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(new DbAdaptor().GetProjects());
+            IList<Project> list = await DbAdaptor.GetProjectsAsync();
+            return View(list);
         }
 
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Project project = new DbAdaptor().GetProject(id);
+            Project project = await DbAdaptor.GetProjectAsync(id);
             if (project == null)
                 return HttpNotFound();
 
             return View(project);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             ViewBag.Lang = new SelectList(new List<SelectListItem> {
                     new SelectListItem {Text = "en", Value = "en"},
                     new SelectListItem {Text = "ru", Value = "ru"},
                     new SelectListItem {Text = "am", Value = "am"}, },
                 "Value", "Text");
-            ViewBag.TechnologyID = new MultiSelectList(new DbAdaptor().GetTechnologies(), "TechnologyID", "Name");
+            IList<Technology> technologies = await DbAdaptor.GetTechnologiesAsync();
+            ViewBag.TechnologyID = new MultiSelectList(technologies, "TechnologyID", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Project project, HttpPostedFileBase[] files, int[] TechnologyID)
+        public async Task<ActionResult> Create(Project project, HttpPostedFileBase[] files, int[] TechnologyID)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +62,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                         imageList.Add(img);
                     }
                 }
-                int projectId = dbAdaptor.CreateProject(new Project
+                int projectId = await DbAdaptor.CreateProjectAsync(new Project
                 {
                     Name = project.Name,
                     Description = project.Description,
@@ -70,7 +71,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                 });
                 foreach (var elem in TechnologyID)
                 {
-                    dbAdaptor.CreateProjectTechnology(new ProjectTechnology
+                    await DbAdaptor.CreateProjectTechnologyAsync(new ProjectTechnology
                     {
                         ProjectID = projectId,
                         TechnologyID = elem,
@@ -86,12 +87,12 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
             return View(project);
         }
 
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Project project = new DbAdaptor().GetProject(id);
+            Project project = await DbAdaptor.GetProjectAsync(id);
             if (project == null)
                 return HttpNotFound();
 
@@ -101,7 +102,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                     new SelectListItem {Text = "am", Value = "am"}, },
             "Value", "Text");
 
-            var all = new DbAdaptor().GetTechnologies()?.ToList();
+            var all = await DbAdaptor.GetTechnologiesAsync();
             var selected = project.Technologies?.ToList();
 
             if (selected != null)
@@ -114,7 +115,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Project project, HttpPostedFileBase[] files, int[] TechnologyID)
+        public async Task<ActionResult> Edit(Project project, HttpPostedFileBase[] files, int[] TechnologyID)
         {
             if (ModelState.IsValid)
             {
@@ -127,7 +128,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                         img = new Image { ImageData = new byte[file.ContentLength], ImageMimeType = file.ContentType, };
                         file.InputStream.Read(img.ImageData, 0, file.ContentLength);
                         img.ProjectID = project.ProjectID;
-                        dbAdaptor.CreateImage(img);
+                        await DbAdaptor.CreateImageAsync(img);
                     }
                 }
 
@@ -135,7 +136,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                 {
                     foreach (var elem in TechnologyID)
                     {
-                        dbAdaptor.CreateProjectTechnology(new ProjectTechnology
+                        await DbAdaptor.CreateProjectTechnologyAsync(new ProjectTechnology
                         {
                             ProjectID = project.ProjectID,
                             TechnologyID = elem,
@@ -143,7 +144,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                     }
                 }
 
-                dbAdaptor.EditProject(project);
+                await DbAdaptor.EditProjectAsync(project);
                 return RedirectToAction("Index");
             }
 
@@ -156,11 +157,11 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Project project = new DbAdaptor().GetProject(id);
+            Project project = await DbAdaptor.GetProjectAsync(id);
 
             if (project == null)
                 return HttpNotFound();
@@ -170,29 +171,29 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            new DbAdaptor().DeleteProject(id);
+            await  DbAdaptor.DeleteProjectAsync(id);
             return RedirectToAction("Index");
         }
 
-        public FileContentResult GetImage(int imageId)
+        public async Task<FileContentResult> GetImage(int imageId)
         {
-            Image image = new DbAdaptor().GetImage(imageId);
+            Image image = await DbAdaptor.GetImageAsync(imageId);
             if (image != null)
                 return File(image.ImageData, image.ImageMimeType);
             return null;
         }
 
-        public ActionResult DeleteImage(Project project, int imgDeleteID)
+        public async Task<ActionResult> DeleteImage(Project project, int imgDeleteID)
         {
-            new DbAdaptor().DeleteImage(imgDeleteID);
+            await DbAdaptor.DeleteImageAsync(imgDeleteID);
             return RedirectToAction("Edit", "Projects", new { id = project.ProjectID });
         }
 
-        public ActionResult DeleteTechnology(Project project, int techDeleteID)
+        public async Task<ActionResult> DeleteTechnology(Project project, int techDeleteID)
         {
-            new DbAdaptor().DeleteProjectTechnology(project.ProjectID, techDeleteID);
+            await DbAdaptor.DeleteProjectTechnologyAsync(project.ProjectID, techDeleteID);
             return RedirectToAction("Edit", "Projects", new { id = project.ProjectID });
         }
     }

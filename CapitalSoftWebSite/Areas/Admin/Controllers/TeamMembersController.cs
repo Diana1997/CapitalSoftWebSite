@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CapitalSoftWebSite.Models;
@@ -15,17 +16,18 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
     {
         private static int? imageId { set; get; }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(new DbAdaptor().GetTeamMembers());
+            IList<TeamMember> list =  await DbAdaptor.GetTeamMembersAsync();
+            return View(list);
         }
 
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            TeamMember teamMember = new DbAdaptor().GetTeamMember(id);
+            TeamMember teamMember = await DbAdaptor.GetTeamMemberAsync(id);
             if (teamMember == null)
                 return HttpNotFound();
 
@@ -44,7 +46,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TeamMember teamMember, HttpPostedFileBase file)
+        public async Task<ActionResult> Create(TeamMember teamMember, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +57,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                     file.InputStream.Read(img.ImageData, 0, file.ContentLength);
                 }
 
-                new DbAdaptor().CreateTeamMember(new TeamMember
+                await DbAdaptor.CreateTeamMemberAsync(new TeamMember
                 {
                     Firstname = teamMember.Firstname,
                     Lastname = teamMember.Lastname,
@@ -74,12 +76,12 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
             return View(teamMember);
         }
 
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            TeamMember teamMember = new DbAdaptor().GetTeamMember(id);
+            TeamMember teamMember = await DbAdaptor.GetTeamMemberAsync(id);
 
             imageId = teamMember.Image?.ImageID;
 
@@ -96,7 +98,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(TeamMember teamMember, HttpPostedFileBase file)
+        public async Task<ActionResult> Edit(TeamMember teamMember, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -112,13 +114,13 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                 {
                     var img = new Image { ImageData = new byte[file.ContentLength], ImageMimeType = file.ContentType, };
                     file.InputStream.Read(img.ImageData, 0, file.ContentLength);
-                    teamMemberEdit.ImageId = new DbAdaptor().CreateImage(img);
+                    teamMemberEdit.ImageId = await DbAdaptor.CreateImageAsync(img);
                 }
                 else
                     teamMemberEdit.ImageId = imageId;
 
                 
-                new DbAdaptor().EditTeamMember(teamMemberEdit);
+                await DbAdaptor.EditTeamMemberAsync(teamMemberEdit);
                 return RedirectToAction("Index");
             }
 
@@ -130,12 +132,12 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
             return View(teamMember);
         }
 
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            TeamMember teamMember = new DbAdaptor().GetTeamMember(id);
+            TeamMember teamMember = await DbAdaptor.GetTeamMemberAsync(id);
             if (teamMember == null)
                 return HttpNotFound();
             return View(teamMember);
@@ -143,23 +145,23 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            new DbAdaptor().DeleteTeamMember(id);
+            await DbAdaptor.DeleteTeamMemberAsync(id);
             return RedirectToAction("Index");
         }
 
-        public FileContentResult GetImage(int imageId)
+        public async Task<FileContentResult> GetImage(int imageId)
         {
-            Image image = new DbAdaptor().GetImage(imageId);
+            Image image = await DbAdaptor.GetImageAsync(imageId);
             if (image != null)
                 return File(image.ImageData, image.ImageMimeType);
             return null;
         }
 
-        public ActionResult  DeleteImage(TeamMember teamMember, int imgDeleteID)
+        public async Task<ActionResult> DeleteImage(TeamMember teamMember, int imgDeleteID)
         {
-            new DbAdaptor().EditTeamMember(new TeamMember
+             await DbAdaptor.EditTeamMemberAsync(new TeamMember
             {
                 TeamMemberID = teamMember.TeamMemberID,
                 Firstname = teamMember.Firstname,
@@ -168,7 +170,7 @@ namespace CapitalSoftWebSite.Areas.Admin.Controllers
                 Position = teamMember.Position,
                 ImageId = null,
             });
-            new DbAdaptor().DeleteImage(imgDeleteID);
+            await DbAdaptor.DeleteTeamMemberAsync(imgDeleteID);
             return RedirectToAction("Edit", "TeamMembers", new { id = teamMember.TeamMemberID});
         }
     }

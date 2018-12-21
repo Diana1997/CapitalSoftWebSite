@@ -20,8 +20,8 @@ namespace CapitalSoftWebSite.Controllers
         public async Task<ActionResult> Index()
         {
             var model = new HomePageModel();
-            model.TeamMembers = await new DbAdaptor().GetTeamMembersAsync(cultureName);
-            model.Projects = await new DbAdaptor().GetProjectsFullAsync(cultureName);
+            model.TeamMembers = await DbAdaptor.GetTeamMembersAsync(cultureName);
+            model.Projects = await  DbAdaptor.GetProjectsFullAsync(cultureName);
             ViewBag.SendMessage = "";
             return View(model);
         }
@@ -35,7 +35,7 @@ namespace CapitalSoftWebSite.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    int b =  await new DbAdaptor().CreateContactAsync(contact);
+                    int b =  await DbAdaptor.CreateContactAsync(contact);
                     if (b > 0)
                     {
                         //ToDo check int 
@@ -43,8 +43,8 @@ namespace CapitalSoftWebSite.Controllers
                         ModelState.Clear();
                     }
                 }
-                model.TeamMembers = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName).ToList();
-                model.Projects = new DbAdaptor().GetProjectsFull().Where(x => x.Lang == cultureName).ToList();
+                model.TeamMembers = await DbAdaptor.GetTeamMembersAsync(cultureName);
+                model.Projects = await DbAdaptor.GetProjectsFullAsync(cultureName);
             }
             catch (Exception)
             {
@@ -53,9 +53,9 @@ namespace CapitalSoftWebSite.Controllers
             return View(model);
         }
 
-        public FileContentResult GetImage(int imageId)
+        public async Task<FileContentResult> GetImage(int imageId)
         {
-            Image image = new DbAdaptor().GetImage(imageId);
+            Image image = await DbAdaptor.GetImageAsync(imageId);
             if (image != null)
                 return File(image.ImageData, image.ImageMimeType);
             return null;
@@ -79,9 +79,9 @@ namespace CapitalSoftWebSite.Controllers
         }
 
         [HttpGet]
-        public ActionResult More(int id)
+        public async Task<ActionResult> More(int id)
         {
-            Project model = new DbAdaptor().GetProject(id);
+            Project model = await DbAdaptor.GetProjectAsync(id);
             if (model == null)
                 return HttpNotFound();
             return PartialView("_More", model);

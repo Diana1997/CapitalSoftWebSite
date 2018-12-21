@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,15 +11,15 @@ namespace CapitalSoftWebSite.Controllers
     public class TeamController : BaseController
     {
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var team = new DbAdaptor().GetTeamMembers().Where(x => x.Lang == cultureName)?.ToList();
+            var team = await DbAdaptor.GetTeamMembersAsync(cultureName); 
             return View(team);
         }
 
-        public FileContentResult GetImage(int imageId)
+        public async Task<FileContentResult> GetImage(int imageId)
         {
-            Image image = new DbAdaptor().GetImage(imageId);
+            Image image = await DbAdaptor.GetImageAsync(imageId);
             if (image != null)
                 return File(image.ImageData, image.ImageMimeType);
             return null;
