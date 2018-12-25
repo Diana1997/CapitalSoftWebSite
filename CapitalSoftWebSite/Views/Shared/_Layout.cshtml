@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using CapitalSoftWebSite.Helpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,6 +10,8 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.css" />
     <link rel="stylesheet" href="~/Content/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Raleway|Roboto" rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -23,11 +27,11 @@
                 </button>
                 <div class="navbar-collapse fff collapse">
                     <ul class="nav navbar-nav navbnar-right">
-                        <li class="active">@Html.ActionLink(Resources.Resource.Home, "", "")</li>
-                        <li>@Html.ActionLink(Resources.Resource.Services, "Index", "Services")</li>
-                        <li>@Html.ActionLink(Resources.Resource.Portfolio, "Index", "Portfolio")</li>
-                        <li>@Html.ActionLink(Resources.Resource.About, "Index", "ContactAs")</li>
-                        <li>@Html.ActionLink(Resources.Resource.Team, "Index", "Team")</li>
+                        <li class='@Html.IsActive("Home", "Index")'>@Html.ActionLink(Resources.Resource.Home, "", "")</li>
+                        <li class='@Html.IsActive("Services", "Index")'>@Html.ActionLink(Resources.Resource.Services, "Index", "Services")</li>
+                        <li class='@Html.IsActive("Portfolio", "Index")'>@Html.ActionLink(Resources.Resource.Portfolio, "Index", "Portfolio")</li>
+                        <li class='@Html.IsActive("ContactAs", "Index")'>@Html.ActionLink(Resources.Resource.About, "Index", "ContactAs")</li>
+                        <li class='@Html.IsActive("Team", "Index")'>@Html.ActionLink(Resources.Resource.Team, "Index", "Team")</li>
                     </ul>
                 </div>
             </div>
@@ -54,16 +58,20 @@
 
 
             </div>
+
             <div class="language col-md-2">
-                <ul>
-                    <li>
-                        <a href="@Url.Action("SetCulture", "Home", new { lang = "en"})">eng</a> |
+                <ul id="lang">
+                    <li class='@Html.IsActive("Home", "SetCulture")'>
+                        @Html.ActionLink("eng", "SetCulture", "Home", new { lang = "en" }, null)
+                      @*  <a href="@Url.Action("SetCulture", "Home", new { lang = "en"})">eng</a> |*@
                     </li>
-                    <li>
-                        <a href="@Url.Action("SetCulture", "Home", new { lang = "ru"})">rus</a> |
+                    <li class='@Html.IsActive("Home", "SetCulture")'>
+                       @Html.ActionLink("rus", "SetCulture", "Home", new { lang = "ru"}, null)
+                        @*<a href="@Url.Action("SetCulture", "Home", new { lang = "ru"})">rus</a> |*@
                     </li>
-                    <li>
-                        <a href="@Url.Action("SetCulture", "Home", new { lang = "am"})">arm</a>
+                    <li class='@Html.IsActive("Home", "SetCulture")'>
+                        @Html.ActionLink("arm", "SetCulture", "Home", new { lang = "am"}, null)
+                        @*<a href="@Url.Action("SetCulture", "Home", new { lang = "am"})">arm</a>*@
                     </li>
                 </ul>
             </div>
@@ -76,34 +84,19 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato|Raleway|Roboto" rel="stylesheet">
 
-
-
-    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-        @*<div class="modal-content"></div>*@
-    </div>
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog"></div>
     <script>
-        $(function () {
-            // Initialize numeric spinner input boxes
-            //$(".numeric-spinner").spinedit();
 
-            // Initalize modal dialog
-            // attach modal-container bootstrap attributes to links with .modal-link class.
-            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+        $(function () {
             $('body').on('click', '.modal-link', function (e) {
                 e.preventDefault();
                 $(this).attr('data-target', '#modal-container');
                 $(this).attr('data-toggle', 'modal');
             });
-
-            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
             $('body').on('click', '.modal-close-btn', function () {
                 $('#modal-container').modal('hide');
             });
-
-            //clear modal cache, so that new content can be loaded
             $('#modal-container').on('hidden.bs.modal', function () {
                 $(this).removeData('bs.modal');
             });
@@ -113,5 +106,20 @@
             });
         });
     </script>
+
+    <style>
+        ul#menu li a {
+            background: none;
+            color: #999;
+            padding: 5px;
+            border-radius: 15px;
+            text-decoration: none;
+        }
+
+            ul#menu li a.currentMenuItem {
+                background-color: black;
+                color: white;
+            }
+    </style>
 </body>
 </html>

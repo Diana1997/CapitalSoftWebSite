@@ -813,43 +813,6 @@ a:focus:after {
 /*Media----------------------------------*/
 
 
-/*slaid---------------------------------*/
-
-/*.slaid {
-    margin: 2% 3% 0 0;
-}
-
-.next {
-    margin: 5.4% 0 0 29.1%;
-    position: absolute;
-    padding: 35.9% 7%;
-    background: #7d7e824f;
-    border: 0px;
-}
-
-    .next:hover {
-        background: #7b7777db;
-    }
-
-    .prev:hover {
-        background: #7b7777db;
-    }
-
-.a1 {
-    margin: 1% 1% 0 0;
-    background: #5988d6;
-    border: 0px;
-    padding: 0.5% 2.5%;
-    border-radius: 14px;
-}
-
-    .a1:hover {
-        background: #3f629c;
-    }*/
-
-
-/*slaid---------------------------------*/
-
 /*contacts-------------------------------*/
 .white-line-left {
     border: 3px solid #fff;
@@ -1113,4 +1076,10 @@ a:focus:after {
 .more-btn {
     padding: 8px 60px;
     margin: 5px -15px;
+}
+
+
+
+#lang li a:active {
+    color: red;
 }

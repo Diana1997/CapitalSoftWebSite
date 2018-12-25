@@ -166,6 +166,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\LinkHelper.cs" />
+    <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\ConnectionParameters.cs" />
     <Compile Include="Models\Contact.cs" />
